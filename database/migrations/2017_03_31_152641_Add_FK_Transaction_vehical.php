@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVehicleDetailsTable extends Migration
+class AddFKTransactionVehical extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,9 @@ class CreateVehicleDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vehicledetails', function (Blueprint $table) {
+        Schema::table('users', function ($table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');            
+        });
     }
 
     /**

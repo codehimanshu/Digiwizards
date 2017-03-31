@@ -15,7 +15,9 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('vehicle_id')->unsigned();            
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->integer('amount');
             $table->smallInteger('status');
@@ -32,6 +34,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        //
+       Schema::dropIfExists('transactions');        
     }
 }
