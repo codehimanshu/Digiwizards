@@ -17,9 +17,9 @@ class CreateTollPlazaFaresTable extends Migration
             $table->increments('id');
             $table->integer('tollplaza_id')->unsigned();
             $table->string('vehicle_type');
-            $table->amount('fare');
+            $table->string('fare');
             $table->smallInteger('status');
-            $table->integer('returnfare');
+            $table->string('returnfare');
         });
     }
 

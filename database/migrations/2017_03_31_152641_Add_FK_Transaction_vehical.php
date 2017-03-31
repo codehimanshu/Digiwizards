@@ -13,8 +13,8 @@ class AddFKTransactionVehical extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');            
+        Schema::table('transactions', function ($table) {
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');            
         });
     }
 

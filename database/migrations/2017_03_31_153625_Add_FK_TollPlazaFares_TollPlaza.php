@@ -14,7 +14,7 @@ class AddFKTollPlazaFaresTollPlaza extends Migration
     public function up()
     {
         Schema::table('tollplazafares', function ($table) {
-            $table->foreign('tollplaza_id')->references('id')->on('tollplaza')->onDelete('cascade');            
+            $table->foreign('tollplaza_id')->references('id')->on('tollplazas')->onDelete('cascade');            
         });
     }
 

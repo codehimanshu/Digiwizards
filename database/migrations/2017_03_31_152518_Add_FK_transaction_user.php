@@ -13,7 +13,7 @@ class AddFKTransactionUser extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
+        Schema::table('transactions', function ($table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');            
         });
     }

@@ -24,7 +24,6 @@ class TollPlaza extends Migration
             $table->string('longitude');
             $table->string('next_city');
             $table->string('previous_city');
-            $table->string('address');
             $table->string('type');
             $table->timestamps();
         });

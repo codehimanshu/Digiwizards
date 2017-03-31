@@ -13,9 +13,9 @@ class AddFKFavTollUserToll extends Migration
      */
     public function up()
     {
-        Schema::create('favtoll', function (Blueprint $table) {
+        Schema::table('favtoll', function ( $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');            
-            $table->foreign('tollplaza_id')->references('id')->on('tollplaza')->onDelete('cascade');            
+            $table->foreign('tollplaza_id')->references('id')->on('tollplazas')->onDelete('cascade');            
         });
     }
 

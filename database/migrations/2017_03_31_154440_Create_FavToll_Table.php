@@ -16,7 +16,7 @@ class CreateFavTollTable extends Migration
         Schema::create('favtoll', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('tollplaza_id')->unsigned();            
-        )};
+        });
     }
 
     /**
