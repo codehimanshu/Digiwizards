@@ -29,10 +29,10 @@ class AdminController extends BaseController
 
 
 			$action="Dashboard";
-			$toll=TollPlaza::all();
+			$tolls=TollPlaza::all();
 			$transactions = Transaction::all();
 
-			return View::make('dashboard_admin', compact('action','toll','transactions'));
+			return View::make('dashboard_admin', compact('action','tolls','transactions'));
 		
 		
 		}
@@ -77,26 +77,33 @@ class AdminController extends BaseController
 		return Redirect::to('dashboard')->with('message','Successfully saved');
 	}
 
-	public static function getdetails($id){
+	public static function getdetails($id)
+	{
+		$action = "getdetails";
 		$toll_model = new TollPlaza;
 		$toll = $toll_model->find($id);
 
 		$user_model = new User;
 		$user = $user_model->find($id);
-		return compact('edittoll','toll','user');
+		return view::make('edittoll',compact('toll','user','action'));
 	}
 
 	public static function editdetails(){
 			$action="Edittoll";
 		$data=Input::all();
-		$user=new User;
+		// var_dump($data);
+		$user_model=new User;
+		$user = $user_model->where('email',$data['email'])->first();
 		$user->name=$data['name'];
 		$user->email=$data['email'];
-		$user->password=Hash::make($data['password']);
+		$user->password=Hash::make($user->data['password']);
 		$user->card_balance=0;
 		$user->role='2';
 		$user->save();
-		$toll=new TollPlaza;
+		$toll_model=new TollPlaza;
+		
+		$toll = $toll_model->where('id',$data['id'])->first();
+
 		$toll->user_id = $user->id;
 		$toll->name=$data['tollname'];
 		$toll->latitude=$data['latitude'];
@@ -110,6 +117,11 @@ class AdminController extends BaseController
 
 		return Redirect::to('dashboard')->with('message','Successfully saved');
 	}	
-
+	public function delete($id){
+		$toll_model = new TollPlaza;
+		$toll = $toll_model->find($id);
+		$toll->delete();
+		return Redirect::to('dashboard')->with('message','Successfully saved');
+	}
 
 }

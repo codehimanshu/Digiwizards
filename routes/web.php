@@ -61,3 +61,6 @@ Route::resource('transaction','TransactionController');
 Route::resource('external_transaction','ExternalTransactionController');
 
 Route::get('getdetails/{id}',array('as'=>'getdetails','uses'=>'AdminController@getdetails'));
+Route::get('delete/{id}',array('as'=>'getdetails','uses'=>'AdminController@delete'));
+
+Route::post('editdetails',array('as'=>'editdetails','uses'=>'AdminController@editdetails'));

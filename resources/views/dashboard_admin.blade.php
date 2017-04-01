@@ -118,26 +118,17 @@
                                     <thead>
                                         <tr>
                                             <th>Toll Name</th>
-                                      
-                                            <th >Income</th>
-                                            <th >Number of users</th>
-                                            <th >2-wheeler</th>
-                                            <th>3-wheeler</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(count($transactions))
-                                        @foreach($transactions as $trans)
+                                        @if(count($tolls))
+                                        @foreach($tolls as $toll)
                                         <tr class="gradeX">
-                                           <td> {{$trans->customer}}</td>
-                                            <td>{{$t->rto->classification}}</td>
-                                            <td>{{$t->user->name}}</td>
-                                            <td>{{$t->vehicle->vehicle_number}}</td>
-                                          
-                                            <td class="center">{{$t->mode_of_payment}}</td>
-                                            <td class="center">{{$t->amount}}</td>
-                                            <td class="center">{{$t->created_at}}</td>
-
+                                           <td> {{$toll->name}}</td>
+                                            <td><a href="{{URL::to('/getdetails/'.$toll->id)}}" class="btn btn-default">edit</a>
+                                                <a href="{{URL::to('/delete/'.$toll->id)}}" class="btn btn-danger">delete</a>
+                                            </td>
 
                                         </tr>
                                         @endforeach

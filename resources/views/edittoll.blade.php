@@ -22,57 +22,58 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             
-                            <b>Create New Toll</b>
+                            <b>Edxit Toll</b>
                         </div>
                         <div class="ibox-content">
-                            <form  class="form-horizontal" action = "{{URL::route('savedetails')}}" method = "post">
+                            <form  class="form-horizontal" action = "{{URL::route('editdetails')}}" method = "post">
                            {{csrf_field()}}
                             
-                               
+                               <input type="text" name="id" value="{{$toll->id}}" hidden>
+                                    
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group"><label class="col-sm-2 control-label">Name</label>
 
-                                    <div class="col-sm-10"><input type="name" class="form-control" name="name"></div>
+                                    <div class="col-sm-10"><input type="name" class="form-control" name="name" value="{{$user->name}}"></div>
                                 </div>
                                   <div class="form-group"><label class="col-sm-2 control-label">Email</label>
 
-                                    <div class="col-sm-10"><input type="email" class="form-control" name="email"></div>
+                                    <div class="col-sm-10"><input type="email" class="form-control" name="email" value="{{$user->email}}"></div>
                                 </div>
                                 <div class="form-group"><label class="col-sm-2 control-label">Password</label>
 
-                                    <div class="col-sm-10"><input type="password" class="form-control" name="password"></div>
+                                    <div class="col-sm-10"><input type="password" class="form-control" name="password" ></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                  <div class="form-group"><label class="col-sm-2 control-label">Toll Name</label>
 
-                                    <div class="col-sm-10"><input type="tollname" class="form-control" name="tollname"></div>
+                                    <div class="col-sm-10"><input type="tollname" class="form-control" name="tollname" value="{{$toll->name}}"></div>
                                 </div>
                                   <div class="form-group"><label class="col-sm-2 control-label">Latitude</label>
 
-                                    <div class="col-sm-10"><input type="latitude" class="form-control" name="latitude"></div>
+                                    <div class="col-sm-10"><input type="latitude" class="form-control" name="latitude" value="{{$toll->latitude}}"></div>
                                 </div>
                                 <div class="form-group"><label class="col-sm-2 control-label">Longitude</label>
 
-                                    <div class="col-sm-10"><input type="Longitude" class="form-control" name="longitude"></div>
+                                    <div class="col-sm-10"><input type="Longitude" class="form-control" name="longitude" value="{{$toll->longitude}}"></div>
                                 </div>
 
                                 
                                 <div class="hr-line-dashed"></div>
                                  <div class="form-group"><label class="col-sm-2 control-label">Address</label>
 
-                                    <div class="col-sm-10"><input type="address" class="form-control" name="address"></div>
+                                    <div class="col-sm-10"><input type="address" class="form-control" name="address" value="{{$toll->address}}"></div>
                                 </div>
                                   <div class="form-group"><label class="col-sm-2 control-label">type</label>
 
-                                    <div class="col-sm-10"><input type="type" class="form-control" name="type"></div>
+                                    <div class="col-sm-10"><input type="type" class="form-control" name="type"  value="{{$toll->type}}"></div>
                                 </div>
                                 <div class="form-group"><label class="col-sm-2 control-label">Next city</label>
 
-                                    <div class="col-sm-10"><input type="next_city" class="form-control" name="next_city"></div>
+                                    <div class="col-sm-10"><input type="next_city" class="form-control" name="next_city" value="{{$toll->next_city}}"></div>
                                 </div>
                                  <div class="form-group"><label class="col-sm-2 control-label">Previous city</label>
 
-                                    <div class="col-sm-10"><input type="previous_city" class="form-control" name="previous_city"></div>
+                                    <div class="col-sm-10"><input type="previous_city" class="form-control" name="previous_city" value="{{$toll->previous_city}}"></div>
                                 </div>
                                 <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Save changes</button>
