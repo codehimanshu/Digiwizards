@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ Transaction;
 use App\ Vehicle;
 use App\ TollPlaza;
+use App\ TollPlazaFares;
 
 class TransactionController extends Controller
 {
@@ -111,10 +112,13 @@ class TransactionController extends Controller
     public function toll_amount(Request $request){
         $tolls = json_decode($request->get('tolls'));
         $vehicle_number = $request->get('vehicle_number');
-        $vehicle = Vehicle::where('vehicle_number',$vehicle_number)->first();
+        $vehicle = Vehicle::where('vehicle_no',$vehicle_number)->first();
         $total_cost = 0;
         foreach ($tolls as $toll) {
-            $total_cost += TollPlazafare::where('tollplaza_id', $toll->id)->where('vehicle_type',$vehicle->type)->first()->fare;
+            $TollPlazaFares =TollPlazaFares::where('tollplaza_id', $toll)->where('vehicle_type',$vehicle->type)->first();
+
+            if($TollPlazaFares) 
+            $total_cost +=  $TollPlazaFares->fare;
         }
         return $total_cost;
     }   
