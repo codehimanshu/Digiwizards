@@ -4,7 +4,7 @@ $(document).ready(function(){
 		console.log(blocking_id);
 		$.ajax({
 			type: 'POST',
-			url: '/block_vehicle',
+			url: '/unblock_vehicle',
 				headers: {
        				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     			},

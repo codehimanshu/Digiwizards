@@ -95,8 +95,11 @@
                                 <h5>Blocked Vehicles</h5>
                             </div>
                             <div class="ibox-content">
-                                <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                                placeholder="Search in table">
+                                <form action="{{URL::to('/block_vehicle')}}" method="POST">
+                                    {!!csrf_field()!!}
+                                    <input type="text" class="form-control" id="vehicle_no" name="vehicle_no" placeholder="Vehicle No">
+                                    <button type="Submit">Submit</button>
+                                </form>
 
                                 <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
                                     <thead>
