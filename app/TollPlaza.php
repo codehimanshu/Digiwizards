@@ -9,6 +9,7 @@ class TollPlaza extends Model
     protected $fillable = [
 	'user_id', 'name','status', 'address','latitude','longitude','next_city','previous_city','type'
 	];
+
 	public $table = "tollplazas";
 
 	public function filter_tolls($source_lat,$source_lang,$dest_lat,$dest_lang)
