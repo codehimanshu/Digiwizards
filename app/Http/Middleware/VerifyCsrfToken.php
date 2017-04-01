@@ -12,6 +12,6 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        'checkpayment','app/circulate'
+        'rfid/checkpayment','app/circulate','storetest'
     ];
 }

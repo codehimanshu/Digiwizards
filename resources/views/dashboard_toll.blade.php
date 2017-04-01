@@ -83,24 +83,44 @@
                     </div>
 
                     <div class="col-sm-4 text-center">
+                    @if($pricetwo&&pricethree&&pricefour)
 
                         <div class="row m-t-xs">
                             <div class="col-xs-4">
                                 <h5 class="m-b-xs">Two wheeler Price</h5>
-                                <h1 class="no-margins">..</h1>
+                                <h1 class="no-margins">{!!$pricetwo->fare!!}</h1>
                                 <div class="font-bold text-navy"><a  href="" data-toggle="modal" data-target="#check" >Change</a> <i class="fa fa-bolt"></i></div>
                             </div>
                             <div class="col-xs-4">
                                 <h5 class="m-b-xs">Three Wheeler Price</h5>
-                                <h1 class="no-margins">..</h1>
+                                <h1 class="no-margins">{!!$pricethree->fare!!}</h1>
                                 <div class="font-bold text-navy"><a  href="" data-toggle="modal" data-target="#check" >Change</a> <i class="fa fa-bolt"></i></div>
                             </div>
                             <div class="col-xs-4">
                                 <h5 class="m-b-xs">4 wheeler Price</h5>
-                                <h1 class="no-margins"></h1>
+                                <h1 class="no-margins">{!!$pricefour->fare!!}</h1>
                                 <div class="font-bold text-navy"><a href="" data-toggle="modal" data-target="#check">Change</a> <i class="fa fa-bolt"></i></div>
                             </div>
                         </div>
+                        @else
+                        <div class="row m-t-xs">
+                            <div class="col-xs-4">
+                                <h5 class="m-b-xs">Two wheeler Price</h5>
+                                <h1 class="no-margins">20</h1>
+                                <div class="font-bold text-navy"><a  href="" data-toggle="modal" data-target="#check" >Change</a> <i class="fa fa-bolt"></i></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <h5 class="m-b-xs">Three Wheeler Price</h5>
+                                <h1 class="no-margins">40</h1>
+                                <div class="font-bold text-navy"><a  href="" data-toggle="modal" data-target="#check" >Change</a> <i class="fa fa-bolt"></i></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <h5 class="m-b-xs">4 wheeler Price</h5>
+                                <h1 class="no-margins">60</h1>
+                                <div class="font-bold text-navy"><a href="" data-toggle="modal" data-target="#check">Change</a> <i class="fa fa-bolt"></i></div>
+                            </div>
+                        </div>
+                        @endif
 
 
                         <table class="table small m-t-sm">
@@ -114,20 +134,7 @@
                 </div>
 
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="small pull-left col-md-3 m-l-lg m-t-md">
-                            <strong>View your</strong> sales of previous days graphically.
-                        </div>
-                        <div class="small pull-right col-md-3 m-t-md text-right">
-                            <strong>Increase</strong> your sales.
-                        </div>
-                        <div class="flot-chart m-b-xl">
-                            <div class="flot-chart-content" id="flot-dashboard5-chart"></div>
-                        </div>
-                    </div>
-                </div>
-
+               
 
 
                 <div class="wrapper wrapper-content animated fadeIn">

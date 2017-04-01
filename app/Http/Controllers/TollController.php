@@ -16,6 +16,7 @@ use App\Transaction;
 use App\Vehicle;
 use Session;
 use App\Rto;
+use App\TollPlazaFares;
 class TollController extends BaseController
 {
 	public function __construct()
@@ -35,8 +36,14 @@ class TollController extends BaseController
 				$trans->vehicle = $vehicle;
 				$rto=Rto::where('vehicle_number',$vehicle->vehicle_number)->first();
 				$trans->rto=$rto;
+
+					
 			}
-			return View::make('dashboard_toll', compact('action','transactions'));
+			$pricetwo=TollPlazaFares::where('vehicle_type','two')->first();
+			$pricethree=TollPlazaFares::where('vehicle_type','three')->first();
+			$pricefour=TollPlazaFares::where('vehicle_type','four')->first();
+
+			return View::make('dashboard_toll', compact('action','transactions','pricetwo','pricethree','pricefour'));
 		
 		}
 		else{
