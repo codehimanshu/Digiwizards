@@ -34,15 +34,15 @@ class GeoLocationController extends Controller
         $tolls = $toll_plaza_model->filter_tolls($data['src_lat'],$data['src_lng'],$data['dest_lat'],$data['dest_lng']);
         $on_path_tolls = array();
         //dd($tolls->toArray());
-        /*foreach ($tolls as $toll) {
-        $response =  \GeometryLibrary\PolyUtil::isLocationOnEdge(
-              ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
-                $decoded_polyline,0.1
+        // foreach ($tolls as $toll) {
+        // $response =  \GeometryLibrary\PolyUtil::isLocationOnEdge(
+        //       ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
+        //         $decoded_polyline,0.1
              
-            );
-           if($response)
-               array_push($on_path_tolls, $toll);
-       }*/
+        //     );
+        //    if($response)
+        //        array_push($on_path_tolls, $toll);
+       // }
        return json_encode($tolls);
    }
     /**

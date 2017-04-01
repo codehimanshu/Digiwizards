@@ -12,4 +12,10 @@ class RFIDController extends Controller
 		$transaction_model = new Transaction;
 		return $transaction_model->check_for_payment($request->vehicle, $request->toll_id);
 	}
+
+	public function getdata(Request $request)
+	{
+		// return var_dump($request);
+		return '{"Succes":"Hello"}';
+	}
 }

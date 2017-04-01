@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ Transaction;
 use App\ Vehicle;
 use App\ TollPlaza;
+use App\ TollPlazaFares;
 
 class TransactionController extends Controller
 {
@@ -39,8 +40,9 @@ class TransactionController extends Controller
     {
         $data = $request->all();
         $transaction = new Transaction;
-        $transaction->user_id = $data['user_id'];
-        $transaction->vehicle_id = $data['vehicle_id'];
+        $vehicle = Vehicle::where('vehicle_no',$data['vehicle_number'])->first();
+        $transaction->user_id = $vehicle->user_id;
+        $transaction->vehicle_id = $vehicle->id;
         $transaction->toll_user_id = $data['toll_user_id'];
         $transaction->amount = $data['amount'];
         $transaction->mode_of_payment = $data['mode_of_payment'];
@@ -48,23 +50,22 @@ class TransactionController extends Controller
         $transaction->date = $data['date'];
         if($transaction->save()){
            if($data['return']){     //return journey
-             $transaction = new Transaction;
-             $transaction->user_id = $data['user_id'];
-             $transaction->vehicle_id = $data['vehicle_id'];
-             $transaction->toll_user_id = $data['toll_user_id'];
-             $transaction->amount = $data['amount'];
-             $transaction->mode_of_payment = $data['mode_of_payment'];
-             $transaction->route = $data['route'];
-             $transaction->date = $data['date'];
-             if($transaction->save())
+               $transaction = new Transaction;
+               $transaction->user_id = $vehicle->user_id;
+               $transaction->vehicle_id = $vehicle->id;
+               $transaction->toll_user_id = $data['toll_user_id'];
+               $transaction->amount = $data['amount'];
+               $transaction->mode_of_payment = $data['mode_of_payment'];
+               $transaction->route = $data['route'];
+               $transaction->date = $data['date'];
+               if($transaction->save())
                 return 1;
-            else return 0;
-
+            else 
+                return 0;
         }
         else return 1;
     }
-    return 1;
-    else 
+   else 
         return 0;
 
 }
@@ -117,11 +118,14 @@ class TransactionController extends Controller
     }
     public function toll_amount(Request $request){
         $tolls = json_decode($request->get('tolls'));
-        $vehicle_id = $request->get('vehicle_id');
-        $vehicle = Vehicle::find($vehicle_id);
+        $vehicle_number = $request->get('vehicle_number');
+        $vehicle = Vehicle::where('vehicle_no',$vehicle_number)->first();
         $total_cost = 0;
         foreach ($tolls as $toll) {
-            $total_cost += TollPlaza::where('id', $toll->id)->first()->fare;
+            $TollPlazaFares =TollPlazaFares::where('tollplaza_id', $toll)->where('vehicle_type',$vehicle->type)->first();
+
+            if($TollPlazaFares) 
+            $total_cost +=  $TollPlazaFares->fare;
         }
         return $total_cost;
     }   

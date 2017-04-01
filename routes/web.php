@@ -19,11 +19,14 @@ Route::get('/', function () {
 // RFID APIs
 Route::group(['prefix' => 'rfid'], function () {
 	Route::get('checkpayment', 'RFIDController@check_for_payment');
+	Route::get('fetchdata', 'RFIDController@getdata');
 });
 
 Route::group(['prefix' => 'app'], function () {
 	Route::resource('geolocation','GeoLocationController');
 	Route::resource('user','UserController');
+	Route::resource('vehicle','VehicleController');
+
 	Route::post('login',array('as'=>'applogin','uses'=>'UserController@login'));
 	Route::post('circulate',array('as'=>'circulateCoordinates','uses'=>'GeoLocationController@circulateCoordinates'));
 
