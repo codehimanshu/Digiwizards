@@ -10,6 +10,57 @@
 <body>
     <div id="wrapper">
         @include('leftnavigation')
+
+        <div class="ibox-content">
+            <form action="{{URL::to('/block_vehicle')}}" method="POST">
+                {!!csrf_field()!!}
+                <input type="text" class="form-control" id="vehicle_no" name="vehicle_no" placeholder="Vehicle No">
+                <button type="Submit">Submit</button>
+            </form>
+
+            <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                <thead>
+                    <tr>
+                        <th>Vehicle type</th>
+                        <th>User Name</th>
+                        <th >Vehicle Name</th>
+                        <th >Mode of Payment</th>
+                        <th >Cost</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if($blocked)
+                    @foreach($blocked as $block)
+                    <tr class="gradeX" id="row_{{$block->id}}">
+                        <td>{{$block->id}}</td>
+                        <td>{{$block->vehicle_no}}</td>
+                        <td><button class="unblock_vehicle" id="{{$block->id}}">Unblock</button></td>
+                      
+                        <td class="center"></td>
+                        <td class="center"></td>
+                        <td class="center"></td>
+
+
+                    </tr>
+                    @endforeach
+                    @else
+                    <tr class="gradeX">
+                        <td colspan="6"><center>NO Blocked Vehicles YET</center></td>
+                    </tr>
+                    @endif
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+
         <div id="page-wrapper" class="gray-bg dashbard-1">
             @include('topnavigation')
             <div class="wrapper wrapper-content animated fadeIn">
