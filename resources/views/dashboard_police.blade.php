@@ -112,10 +112,10 @@
                                     <tbody>
                                         @if($blocked)
                                         @foreach($blocked as $block)
-                                        <tr class="gradeX" id="row_{{$block->blocked_id}}">
-                                            <td>{{$block->blocked_id}}</td>
+                                        <tr class="gradeX" id="row_{{$block->id}}">
+                                            <td>{{$block->id}}</td>
                                             <td>{{$block->vehicle_no}}</td>
-                                            <td><button class="unblock_vehicle" id="{{$block->blocked_id}}">Unblock</button></td>
+                                            <td><button class="unblock_vehicle" id="{{$block->id}}">Unblock</button></td>
                                           
                                             <td class="center"></td>
                                             <td class="center"></td>
