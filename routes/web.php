@@ -19,11 +19,14 @@ Route::get('/', function () {
 // RFID APIs
 Route::group(['prefix' => 'rfid'], function () {
 	Route::get('checkpayment', 'RFIDController@check_for_payment');
+	Route::get('fetchdata', 'RFIDController@getdata');
 });
 
 Route::group(['prefix' => 'app'], function () {
 	Route::resource('geolocation','GeoLocationController');
 	Route::resource('user','UserController');
+	Route::resource('vehicle','VehicleController');
+
 	Route::post('login',array('as'=>'applogin','uses'=>'UserController@login'));
 	Route::post('circulate',array('as'=>'circulateCoordinates','uses'=>'GeoLocationController@circulateCoordinates'));
 
@@ -52,4 +55,8 @@ Route::post('block_vehicle', 'PoliceController@block');
 Route::post('toll_amount','TransactionController@toll_amount');
 Route::get('create',array('as'=>'create','uses'=>'AdminController@create'));
 
+
+Route::get('transaction/show','TransactionController@show');
+Route::resource('transaction','TransactionController');
+Route::resource('external_transaction','ExternalTransactionController');
 
