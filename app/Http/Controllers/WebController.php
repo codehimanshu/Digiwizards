@@ -13,6 +13,8 @@ use Redirect;
 use Validator;
 use Auth;
 use Session;
+use App\TollPlaza;
+use App\TollPlazaFares;
 
 class WebController extends BaseController
 {
@@ -44,8 +46,18 @@ class WebController extends BaseController
 		}
 		else {
 			if(Auth::attempt($data)){
-				
+				$toll_id = TollPlaza::where('user_id',Auth::user()->id)->first()->id;
+				//dd($toll_id);
 
+				$pricethree=TollPlazaFares::where([['vehicle_type','three'],['tollplaza_id',$toll_id]])->first();
+				$pricefour=TollPlazaFares::where([['vehicle_type','four'],['tollplaza_id',$toll_id]])->first();
+				//dd($pricethree);
+
+				if($pricethree)
+				session(['pricethree'=>$pricethree->fare]);
+
+				if($pricefour)
+				session(['pricefour'=>$pricefour->fare]);
 				return Redirect::intended('dashboard')->with('success','Successfully Logged In');
 			}
 			else{
@@ -56,9 +68,14 @@ class WebController extends BaseController
 
 	public function dashboard(){
 		if(Auth::check()){
-			if(Auth::user()->role==1){
+			if(intval(Auth::user()->role) == 2){ 
 				return TollController::admin();
 			}
+			else
+			if(Auth::user()->role==6){
+				$police_model = new PoliceController;
+				return $police_model->dashboard();
+			}	
 			/*else{
 				return DealerController::dealers();
 			}*/
@@ -68,7 +85,23 @@ class WebController extends BaseController
 		}
 		
 	}
+public function save_settings(){
+	$data = Input::all();
+	$toll_id = TollPlaza::where('user_id',Auth::user()->id)->first()->id;
+	$pricethree=TollPlazaFares::where([['vehicle_type','three'],['tollplaza_id',$toll_id]])->first();
+	$pricefour=TollPlazaFares::where([['vehicle_type','four'],['tollplaza_id',$toll_id]])->first();
 
+	$pricethree->fare=$data['pricethree'];
+	$pricefour->fare=$data['pricefour'];
+	$pricefour->save();
+	$pricethree->save();
+	
+	Session::put('pricethree',$data['pricethree']);
+	Session::put('pricefour',$data['pricefour']);
+
+	Session::forget('check');
+	return Redirect::route('dashboard')->with('success','Settings Successfully Saved');
+}
 
 
 }

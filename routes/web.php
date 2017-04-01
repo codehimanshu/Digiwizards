@@ -10,11 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('testing', 'GeoLocationController@testing');
+
 
 Route::get('/', function () {
 	return view('welcome');
 });
-
 // RFID APIs
 Route::group(['prefix' => 'rfid'], function () {
 	Route::get('checkpayment', 'RFIDController@check_for_payment');
@@ -33,4 +34,17 @@ Route::get('home',array('as'=>'home','uses'=>'WebController@home'));
 Route::get('logout',array('as'=>'logout','uses'=>'WebController@logout'));
 Route::post('log',array('as'=>'login','uses'=>'WebController@log'));
 
+Route::post('storetest', 'GeoLocationController@storetest');
+Route::get('dashboard',array('as'=>'dashboard','uses'=>'WebController@dashboard'));
+
+
+
 Route::get('storetest', 'GeoLocationController@store');
+Route::post('save_settings',array('as'=>'save_settings','uses'=>'WebController@save_settings'));
+
+
+
+
+Route::post('block_vehicle', 'PoliceController@block');
+
+
