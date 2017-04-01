@@ -46,12 +46,29 @@ class WebController extends BaseController
 			if(Auth::attempt($data)){
 				
 
-				return Redirect::intended('home')->with('success','Successfully Logged In');
+				return Redirect::intended('dashboard')->with('success','Successfully Logged In');
 			}
 			else{
 				return Redirect::route('home')->with('message','Your Customer Code / Password combination is incorrect!')->withInput();
 			}
 		}
 	}
+
+	public function dashboard(){
+		if(Auth::check()){
+			if(Auth::user()->role==1){
+				return TollController::admin();
+			}
+			/*else{
+				return DealerController::dealers();
+			}*/
+		}
+		else{
+			return Redirect::route('home');
+		}
+		
+	}
+
+
 
 }

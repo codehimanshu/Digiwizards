@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/',array('as'=>'home','uses'=>'WebController@home'));
+Route::get('home',array('as'=>'home','uses'=>'WebController@home'));
 /*Route::get('dashboard',array('as'=>'dashboard','uses'=>'WebController@dashboard'));*/
 
 Route::get('logout',array('as'=>'logout','uses'=>'WebController@logout'));
