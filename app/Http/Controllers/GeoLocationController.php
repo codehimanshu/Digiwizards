@@ -13,7 +13,7 @@ class GeoLocationController extends Controller
      */
     public function index()
     {
-/*
+    /*
     $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
              ['lat' => 25.774, 'lng' => -80.190], // point array [lat, lng]
              [ // poligon arrays of [lat, lng]
@@ -25,28 +25,30 @@ class GeoLocationController extends Controller
        dd($response);*/
    }
 
-    public function storetest(Request $request)
-    {
+  public function storetest(Request $request)
+   {
+        $data = $request->all();
+        $decoded_polyline = json_decode($data['polyline'],true);
         $toll_plaza_model = new TollPlaza;
-        $tolls = $toll_plaza_model->filter_tolls($request->src_lat,$request->src_lng,$request->dest_lat,$request->dest_lng);
+        $tolls = $toll_plaza_model->filter_tolls($data['src_lat'],$data['src_lng'],$data['dest_lat'],$data['dest_lng']);
         $on_path_tolls = array();
-        return "Helo";
-        return $request->polyline;
+        dd($tolls);
         foreach ($tolls as $toll) {
         $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
               ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
-             [ // poligon arrays of [lat, lng]
-             ['lat' => 25.774, 'lng' => -80.190], 
-             ['lat' => 18.466, 'lng' => -66.118], 
-             ['lat' => 32.321, 'lng' => -64.757]
-             ]);
-
-            if($response)
-                array_push($on_path_tolls, $toll);
-        }
-        return json_encode($on_path_tolls);
-    }
-
+                $decoded_polyline
+               /* [ // poligon arrays of [lat, lng]
+                ['lat' => 25.774, 'lng' => -80.190], 
+                ['lat' => 18.466, 'lng' => -66.118], 
+                ['lat' => 32.321, 'lng' => -64.757]
+                ]*/
+            );
+        return $toll->latitude . "  ". $toll->longitude;
+           if($response)
+               array_push($on_path_tolls, $toll);
+       }
+       return json_encode($on_path_tolls);
+   }
     /**
      * Show the form for creating a new resource.
      *
@@ -70,7 +72,7 @@ class GeoLocationController extends Controller
         $toll_plaza_model = new TollPlaza;
         $tolls = $toll_plaza_model->filter_tolls($request->src_lat,$request->src_lng,$request->dest_lat,$request->dest_lng);
         $on_path_tolls = array();
-        return $request->polyline;
+        // return $request->polyline;
         foreach ($tolls as $toll) {
         $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
               ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
