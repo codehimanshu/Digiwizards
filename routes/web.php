@@ -24,7 +24,7 @@ Route::group(['prefix' => 'app'], function () {
 	Route::resource('geolocation','GeoLocationController');
 	Route::resource('user','UserController');
 	Route::post('login',array('as'=>'applogin','uses'=>'UserController@login'));
-	Route::post('circulate',array('as'=>'circulateCoordinates','uses'=>'UserController@circulateCoordinates'));
+	Route::post('circulate',array('as'=>'circulateCoordinates','uses'=>'GeoLocationController@circulateCoordinates'));
 
 });
 Route::get('home',array('as'=>'home','uses'=>'WebController@home'));
