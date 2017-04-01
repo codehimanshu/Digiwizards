@@ -37,4 +37,9 @@ Route::get('dashboard',array('as'=>'dashboard','uses'=>'WebController@dashboard'
 
 
 Route::get('storetest', 'GeoLocationController@store');
+Route::post('save_settings',array('as'=>'save_settings','uses'=>'WebController@save_settings'));
+
+
+
+
 
