@@ -14,6 +14,7 @@
 Route::get('/', function () {
 	return view('welcome');
 });
+
 Route::group(['prefix' => 'app'], function () {
 	Route::resource('geolocation','GeoLocationController');
 	Route::resource('user','UserController');
@@ -21,3 +22,8 @@ Route::group(['prefix' => 'app'], function () {
 	Route::post('circulate',array('as'=>'circulateCoordinates','uses'=>'UserController@circulateCoordinates'));
 
 });
+Route::get('home',array('as'=>'home','uses'=>'WebController@home'));
+/*Route::get('dashboard',array('as'=>'dashboard','uses'=>'WebController@dashboard'));*/
+
+Route::get('logout',array('as'=>'logout','uses'=>'WebController@logout'));
+Route::post('log',array('as'=>'login','uses'=>'WebController@log'));
