@@ -38,11 +38,14 @@ class ExternalTransactionController extends Controller
        // if($data['return'])  //return journey
        $transaction = new Transaction;
        $transaction->user_id = $data['user_id'];
-       $transaction->toll_user_id = $data['toll_user_id'];
+       $transaction->toll_user_id = 1;
        $transaction->amount = $data['amount'];
        $transaction->mode_of_payment = $data['mode_of_payment'];
       //  $transaction->route = $data['route'];
        $transaction->date = $data['date'];
+       $user =  User::find($data['user_id']);
+        $user->card_balance += $data['amount'];
+        $user->save();
        if($transaction->save())
         return 1;
     else 
