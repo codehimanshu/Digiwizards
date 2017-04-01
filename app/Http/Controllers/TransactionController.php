@@ -59,13 +59,12 @@ class TransactionController extends Controller
                $transaction->date = $data['date'];
                if($transaction->save())
                 return 1;
-            else return 0;
-
+            else 
+                return 0;
         }
         else return 1;
     }
-    return 1;
-    else 
+   else 
         return 0;
 
 }
