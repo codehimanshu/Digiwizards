@@ -49,3 +49,5 @@ Route::post('unblock_vehicle', 'PoliceController@unblock');
 Route::post('block_vehicle', 'PoliceController@block');
 Route::post('toll_amount','TransactionController@toll_amount');
 
+Route::get('transaction/show','TransactionController@show');
+
