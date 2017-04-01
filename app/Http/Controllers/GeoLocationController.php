@@ -36,6 +36,8 @@ class GeoLocationController extends Controller
         // return "Helo";  
         $polyline= json_decode($request->polyline,true);
         // return $polyline;
+        return $request->polyline;
+// >>>>>>> 1b2442899861fcabbc091d10c35cbbbd8a981427
         foreach ($tolls as $toll) {
         $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
               ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]

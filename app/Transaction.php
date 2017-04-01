@@ -24,7 +24,6 @@ class Transaction extends Model
 				if($diff<1){
 					$toll_list = $data->route;
 					$toll_list_arr = json_decode($toll_list,true);
-					// var_dump($toll_list_arr);
 					$key=array_search($toll_id,$toll_list_arr);
 					if(is_numeric($key)){
 						//payment made for this toll
@@ -32,8 +31,7 @@ class Transaction extends Model
 						$toll_list_obj = (object) $toll_list_arr;
 						$toll_list= json_encode($toll_list_obj);
 						$data->route = $toll_list;
-						DB::table('transactions')->where('id',$data->id)->update(['route'=>$toll_list]);
-						// $data->save();
+						$data->save();
 						return 1;
 					}
 					else{
