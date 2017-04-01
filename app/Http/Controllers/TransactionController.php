@@ -45,12 +45,28 @@ class TransactionController extends Controller
         $transaction->mode_of_payment = $data['mode_of_payment'];
         $transaction->route = $data['route'];
         $transaction->date = $data['date'];
-        if($transaction->save())
-            return 1;
-        else 
-            return 0;
+        if($transaction->save()){
+           if($data['return']){
+             $transaction = new Transaction;
+             $transaction->user_id = $data['user_id'];
+             $transaction->vehicle_id = $data['vehicle_id'];
+             $transaction->toll_user_id = $data['toll_user_id'];
+             $transaction->amount = $data['amount'];
+             $transaction->mode_of_payment = $data['mode_of_payment'];
+             $transaction->route = $data['route'];
+             $transaction->date = $data['date'];
+             if($transaction->save())
+                return 1;
+            else return 0;
 
+        }
+        else return 1;
     }
+    return 1;
+    else 
+        return 0;
+
+}
 
     /**
      * Display the specified resource.
