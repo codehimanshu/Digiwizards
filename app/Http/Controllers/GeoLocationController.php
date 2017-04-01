@@ -120,11 +120,12 @@ class GeoLocationController extends Controller
         $to = array('lat'=>$request->get('lat'),'lng'=>$request->get('lng'));
         foreach ($toll as $t) {
             $from = array('lat'=>$t->latitude,'lng'=>$t->longitude);
-            $response = computeDistanceBetween( $from, $to );
+            $response = \GeometryLibrary\SphericalUtil::computeDistanceBetween( $from, $to );
             if($response <= $distance){
                 $relevent[] = $t;
             }
-        } 
+        }
+        return json_encode($relevent); 
     }
 }
     
