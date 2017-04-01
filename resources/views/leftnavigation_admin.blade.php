@@ -39,9 +39,7 @@
              <li class="active">
                 <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Edit toll</span></a>
             </li>
-             <li class="active">
-                <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">View Tolls</span></a>
-            </li>
+             
              <li class="active">
                 <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Check Prices</span></a>
             </li>
