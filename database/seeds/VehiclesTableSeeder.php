@@ -12,9 +12,9 @@ class VehiclesTableSeeder extends Seeder
     public function run()
     {
         DB::table('vehicles')->insert([
-        	'user_id'=>4,
+        	'user_id'=>1,
         	'vehicle_no'=>"DL7SAC0338",
-        	'type'=>"domestinc",
+        	'type'=>"domestic",
         	'status'=>0
     	]);
     }
