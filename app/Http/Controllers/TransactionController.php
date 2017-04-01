@@ -39,8 +39,9 @@ class TransactionController extends Controller
     {
         $data = $request->all();
         $transaction = new Transaction;
-        $transaction->user_id = $data['user_id'];
-        $transaction->vehicle_id = $data['vehicle_id'];
+        $vehicle = Vehicle::where('vehicle_number',$data['vehicle_number'])->first();
+        $transaction->user_id = $vehicle->user_id;
+        $transaction->vehicle_id = $vehicle->id;
         $transaction->toll_user_id = $data['toll_user_id'];
         $transaction->amount = $data['amount'];
         $transaction->mode_of_payment = $data['mode_of_payment'];
@@ -48,15 +49,15 @@ class TransactionController extends Controller
         $transaction->date = $data['date'];
         if($transaction->save()){
            if($data['return']){     //return journey
-             $transaction = new Transaction;
-             $transaction->user_id = $data['user_id'];
-             $transaction->vehicle_id = $data['vehicle_id'];
-             $transaction->toll_user_id = $data['toll_user_id'];
-             $transaction->amount = $data['amount'];
-             $transaction->mode_of_payment = $data['mode_of_payment'];
-             $transaction->route = $data['route'];
-             $transaction->date = $data['date'];
-             if($transaction->save())
+               $transaction = new Transaction;
+               $transaction->user_id = $vehicle->user_id;
+               $transaction->vehicle_id = $vehicle->id;
+               $transaction->toll_user_id = $data['toll_user_id'];
+               $transaction->amount = $data['amount'];
+               $transaction->mode_of_payment = $data['mode_of_payment'];
+               $transaction->route = $data['route'];
+               $transaction->date = $data['date'];
+               if($transaction->save())
                 return 1;
             else return 0;
 
