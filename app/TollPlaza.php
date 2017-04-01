@@ -19,7 +19,7 @@ class TollPlaza extends Model
 		$min_lang = min($source_lang,$dest_lang);
 		$max_lang = max($source_lang,$dest_lang);
 
-		$tolls = self::whereBetween('latitude',[$min_lat,$max_lat])->whereBetween('longitude',[$min_lang,$max_lang]);
-		return var_dump($tolls[0]);
+		$tolls = self::whereBetween('latitude',[$min_lat,$max_lat])->whereBetween('longitude',[$min_lang,$max_lang])->get();
+		return $tolls;
 	}
 }
