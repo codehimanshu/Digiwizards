@@ -25,17 +25,7 @@
             </li>
             @endif
 
-            @if(Request::path() == 'block')
-
-            <li class="active">
-                <a href="{{URL::route('block')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Block Cars</span></a>
-            </li>
-            @else
-
-            <li >
-                <a href="{{URL::route('block')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Block Cars</span></a>
-            </li>
-            @endif
+        
             
             
               

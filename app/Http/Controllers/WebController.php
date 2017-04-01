@@ -46,7 +46,9 @@ class WebController extends BaseController
 		}
 		else {
 			if(Auth::attempt($data)){
-				$toll_id = TollPlaza::where('user_id',Auth::user()->id)->first()->id;
+				if(Auth::user()->role=='2'){
+
+					$toll_id = TollPlaza::where('user_id',Auth::user()->id)->first()->id;
 				//dd($toll_id);
 
 				$pricethree=TollPlazaFares::where([['vehicle_type','three'],['tollplaza_id',$toll_id]])->first();
@@ -58,6 +60,8 @@ class WebController extends BaseController
 
 				if($pricefour)
 				session(['pricefour'=>$pricefour->fare]);
+				}
+				
 				return Redirect::intended('dashboard')->with('success','Successfully Logged In');
 			}
 			else{
@@ -70,6 +74,9 @@ class WebController extends BaseController
 		if(Auth::check()){
 			if(intval(Auth::user()->role) == 2){ 
 				return TollController::admin();
+			}
+			else if(intval(Auth::user()->role) == 5){ 
+				return AdminController::admin();
 			}
 			else
 			if(Auth::user()->role==6){
