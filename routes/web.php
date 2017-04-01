@@ -60,3 +60,4 @@ Route::get('transaction/show','TransactionController@show');
 Route::resource('transaction','TransactionController');
 Route::resource('external_transaction','ExternalTransactionController');
 
+Route::get('getdetails/{id}',array('as'=>'getdetails','uses'=>'AdminController@getdetails'));

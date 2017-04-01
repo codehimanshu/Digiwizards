@@ -75,13 +75,38 @@ class AdminController extends BaseController
 		$toll->save();
 
 		return Redirect::to('dashboard')->with('message','Successfully saved');
-
-
-
-
 	}
 
-	
+	public static function getdetails($id){
+		$toll_model = new TollPlaza;
+		$toll = $toll_model->get_details($id);
+		return compact('edit_toll','toll');
+	}
+
+	public static function editdetails(){
+			$action="Edittoll";
+		$data=Input::all();
+		$user=new User;
+		$user->name=$data['name'];
+		$user->email=$data['email'];
+		$user->password=Hash::make($data['password']);
+		$user->card_balance=0;
+		$user->role='2';
+		$user->save();
+		$toll=new TollPlaza;
+		$toll->user_id = $user->id;
+		$toll->name=$data['tollname'];
+		$toll->latitude=$data['latitude'];
+		$toll->longitude=$data['longitude'];
+		$toll->type=$data['type'];
+		$toll->next_city=$data['next_city'];
+		$toll->previous_city=$data['previous_city'];
+		$toll->address=$data['address'];
+		$toll->status=0;
+		$toll->save();
+
+		return Redirect::to('dashboard')->with('message','Successfully saved');
+	}	
 
 
 }
