@@ -25,7 +25,7 @@ class TollController extends BaseController
 	public static function admin(){
 		if(Auth::user()-> role == 1)
 		{  
-			$transaction = 
+			
 			
 		}
 	}

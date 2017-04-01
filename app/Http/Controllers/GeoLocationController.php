@@ -25,22 +25,29 @@ class GeoLocationController extends Controller
        dd($response);
    }
 
+   public function testing (Request $request){
+    return "le ".$request->src_lat;
+   }
     public function storetest(Request $request)
     {
         $toll_plaza_model = new TollPlaza;
         $tolls = $toll_plaza_model->filter_tolls($request->src_lat,$request->src_lng,$request->dest_lat,$request->dest_lng);
         $on_path_tolls = array();
-        return "Helo";
-        return $request->polyline;
+        // return "Helo";  
+        $polyline= json_decode($request->polyline,true);
+        // return $polyline;
         foreach ($tolls as $toll) {
         $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
               ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
+             /*
              [ // poligon arrays of [lat, lng]
              ['lat' => 25.774, 'lng' => -80.190], 
              ['lat' => 18.466, 'lng' => -66.118], 
              ['lat' => 32.321, 'lng' => -64.757]
-             ]);
+             ]*/
+             $polyline
 
+             );
             if($response)
                 array_push($on_path_tolls, $toll);
         }
