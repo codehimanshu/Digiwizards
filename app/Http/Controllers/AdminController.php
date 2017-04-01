@@ -16,7 +16,6 @@ use Session;
 use App\TollPlaza;
 use App\TollPlazaFares;
 use App\Transaction;
-use App\Blocking;
 
 class AdminController extends BaseController
 {
@@ -25,17 +24,60 @@ class AdminController extends BaseController
 		if(intval(Auth::user()->role) == 5)
 		{  
 
+			//dd("hello");
+
+
 			$action="Dashboard";
 			$toll=TollPlaza::all();
 			$transactions = Transaction::all();
 
-	    	$blocking_model = new Blocking;
-	    	$blocked = $blocking_model->getAllBlocked();
-
-			return View::make('dashboard_admin', compact('action','toll','transactions','blocked'));
+			return View::make('dashboard_admin', compact('action','toll','transactions'));
+		
+		
 		}
 		else{
-			return Redirect::route('home');
-		}	
+		return Redirect::route('home');
+
 	}
+	}
+
+	public static function create(){
+	
+
+			$action="Createtoll";
+
+		return View::make('createtoll',compact('action'));
+		
+		
+	}
+
+	public static function savedetails(){
+			$action="Createtoll";
+		$data=Input::all();
+		$user=new User;
+		$user->name=$data['name'];
+		$user->email=$data['email'];
+		$user->password=Hash::make($data['password']);
+		$user->role='2';
+		$user->save();
+		$toll=new TollPlaza;
+		$toll->name=$data['tollname'];
+		$toll->latitude=$data['latitude'];
+		$toll->longitude=$data['longitude'];
+		$toll->type=$data['type'];
+		$toll->next_city=$data['next_city'];
+		$toll->previous_city=$data['previous_city'];
+		$toll->address=$data['address'];
+		$toll->save();
+
+		return Redirect::to('dashboard')->with('message','Successfully saved');
+
+
+
+
+	}
+
+	
+
+
 }
