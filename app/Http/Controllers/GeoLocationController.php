@@ -13,8 +13,9 @@ class GeoLocationController extends Controller
      */
     public function index()
     {
-       $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
-              ['lat' => 25.774, 'lng' => -80.190], // point array [lat, lng]
+
+    $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
+             ['lat' => 25.774, 'lng' => -80.190], // point array [lat, lng]
              [ // poligon arrays of [lat, lng]
              ['lat' => 25.774, 'lng' => -80.190], 
              ['lat' => 18.466, 'lng' => -66.118], 
@@ -42,20 +43,25 @@ class GeoLocationController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
 
+        $toll_plaza_model = new TollPlaza;
+        $tolls = $toll_plaza_model->filter_tolls($request->src_lat,$request->src_lng,$request->dest_lat,$request->dest_lng);
+        $on_path_tolls = array();
+        foreach ($tolls as $toll) {
         $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
-              ['lat' => 25.774, 'lng' => -80.190], // point array [lat, lng]
+              ['lat' => $toll->lat, 'lng' => -80.190], // point array [lat, lng]
              [ // poligon arrays of [lat, lng]
              ['lat' => 25.774, 'lng' => -80.190], 
              ['lat' => 18.466, 'lng' => -66.118], 
              ['lat' => 32.321, 'lng' => -64.757]
-             ]);  
+             ]);
 
-        dd($response);
-
-    }
-
+            if($response)
+                array_push($on_path_tolls, $toll->id);
+        }
+        return json_encode($on_path_tolls);
+}
     /**
      * Display the specified resource.
      *
