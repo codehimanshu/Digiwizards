@@ -20,7 +20,8 @@ class CreateTransactionsTable extends Migration
             $table->integer('amount');
             $table->smallInteger('status');
             $table->string('mode_of_payment');
-            $table->string('route');            
+            $table->string('route');          
+            $table->timestamp('date')->dafault(DB::raw('CURRENT_TIMESTAMP'));  
             $table->timestamps();
         });
     }

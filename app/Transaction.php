@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
 	protected $fillable = [
-	'user_id', 'vehicle_id', 'amount','staus', 'mode_of_payment','route'
+	'user_id', 'vehicle_id', 'amount','status', 'mode_of_payment','route'
 	];
 	public $table = "transactions";
 	public function check_for_payment($vehicle,$date,$toll_id,$data){
