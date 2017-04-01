@@ -15,15 +15,15 @@ class GeoLocationController extends Controller
     {
 
     $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
-              ['lat' => 25.774, 'lng' => -80.190], // point array [lat, lng]
+             ['lat' => 25.774, 'lng' => -80.190], // point array [lat, lng]
              [ // poligon arrays of [lat, lng]
              ['lat' => 25.774, 'lng' => -80.190], 
              ['lat' => 18.466, 'lng' => -66.118], 
              ['lat' => 32.321, 'lng' => -64.757]
              ]);  
 
-     dd($response);
- }
+       dd($response);
+   }
 
     public function storetest(Request $request)
     {
@@ -69,7 +69,6 @@ class GeoLocationController extends Controller
         }
         return json_encode($on_path_tolls);
 }
-
     /**
      * Display the specified resource.
      *
@@ -114,4 +113,18 @@ class GeoLocationController extends Controller
     {
         //
     }
+    public function circulateCoordinates(Request $request){
+        $toll = TollPlaza::all();
+        $relevent =[];
+        $distance = $request->get('distance');
+        $to = array('lat'=>$request->get('lat'),'lng'=>$request->get('lng'));
+        foreach ($toll as $t) {
+            $from = array('lat'=>$t->latitude,'lng'=>$t->longitude);
+            $response = computeDistanceBetween( $from, $to );
+            if($response <= $distance){
+                $relevent[] = $t;
+            }
+        } 
+    }
 }
+    
