@@ -44,7 +44,7 @@ class ExternalTransactionController extends Controller
       //  $transaction->route = $data['route'];
        $transaction->date = $data['date'];
        $user =  User::find($data['user_id']);
-        $user->card_balance += $data['amount'];
+        $user->card_balance =  floatval($user->card_balance) + floatval($data['amount']);
         $user->save();
        if($transaction->save())
         return 1;
