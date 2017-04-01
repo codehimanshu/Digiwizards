@@ -13,7 +13,7 @@ class Blocking extends Model
 
 	public function getAllBlocked()
 	{
-		$vehicles = self::join('users','users.id','=','blocking.blocked_id')->join('vehicles','vehicles.id','=','blocking.blocked_vehicle')->get();
+		$vehicles = self::join('users','users.id','=','blocking.blocked_id')->join('vehicles','vehicles.id','=','blocking.blocked_vehicle')->select('blocking.id','vehicles.vehicle_no')->get();
 		return $vehicles;
 	}
 }

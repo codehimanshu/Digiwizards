@@ -17,6 +17,7 @@ use App\Vehicle;
 use Session;
 use App\Rto;
 use App\TollPlazaFares;
+use App\TollPlaza;
 class TollController extends BaseController
 {
 	public function __construct()
@@ -25,8 +26,11 @@ class TollController extends BaseController
 	}
 
 	public static function admin(){
-		if(Auth::user()-> role == 1)
+		if(intval(Auth::user()->role) == 2)
 		{  
+
+			//dd("hello");
+
 
 			$action="Dashboard";
 			$transactions = Transaction::where('user_id',Auth::user()->id)->get();
@@ -40,11 +44,7 @@ class TollController extends BaseController
 
 					
 			}
-			$pricetwo=TollPlazaFares::where('vehicle_type','two')->first();
-			$pricethree=TollPlazaFares::where('vehicle_type','three')->first();
-			$pricefour=TollPlazaFares::where('vehicle_type','four')->first();
-
-			return View::make('dashboard_toll', compact('action','transactions','pricetwo','pricethree','pricefour'));
+			return View::make('dashboard_toll', compact('action','transactions'));
 		
 		}
 		else{

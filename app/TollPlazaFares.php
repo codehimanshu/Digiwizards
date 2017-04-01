@@ -10,4 +10,5 @@ class TollPlazaFares extends Model
 	'tollplaza_id', 'fare', 'status', 'returnfare', 'vehicle_type'
 	];
 	public $table = "tollplazafares";
+	public $timestamps = false;
 }

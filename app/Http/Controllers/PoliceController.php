@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TollPlaza;
 use App\Blocking;
-use DB;
 
 class PoliceController extends Controller
 {
@@ -20,7 +19,8 @@ class PoliceController extends Controller
     public function block(Request $request)
     {
     	$blocking_id = $request->blocking_id;
-    	DB::table('blocking')->where('id',$blocking_id)->delete();
+    	$vehicle = Blocking::find($blocking_id);
+    	$vehicle->delete();
     	return "success";
     }
 }
