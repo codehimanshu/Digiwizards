@@ -120,7 +120,7 @@ class TransactionController extends Controller
         $vehicle = Vehicle::where('vehicle_number',$vehicle_number)->first();
         $total_cost = 0;
         foreach ($tolls as $toll) {
-            $total_cost += TollPlaza::where('id', $toll->id)->first()->fare;
+            $total_cost += TollPlazafare::where('tollplaza_id', $toll->id)->where('vehicle_type',$vehicle->type)->first()->fare;
         }
         return $total_cost;
     }   
