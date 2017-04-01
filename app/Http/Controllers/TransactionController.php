@@ -7,7 +7,7 @@ use App\ Transaction;
 use App\ Vehicle;
 use App\ TollPlaza;
 use App\ TollPlazaFares;
-
+use App\ User;
 class TransactionController extends Controller
 {
     /**
@@ -63,7 +63,7 @@ class TransactionController extends Controller
              $transaction->route = $data['route'];
              $transaction->date = $data['date'];
              $user =  User::find($vehicle->user_id);
-             $user->card_balance -= $data['amount'];
+             $user->card_balance = floatval($user->card_balance) - floatval($data['amount']);
              $user->save();
              if($transaction->save())
                 return 1;

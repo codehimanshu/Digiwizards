@@ -44,6 +44,8 @@ Route::get('dashboard',array('as'=>'dashboard','uses'=>'WebController@dashboard'
 
 Route::get('storetest', 'GeoLocationController@store');
 Route::post('save_settings',array('as'=>'save_settings','uses'=>'WebController@save_settings'));
+Route::post('savedetails',array('as'=>'savedetails','uses'=>'AdminController@savedetails'));
+
 
 
 
@@ -51,7 +53,15 @@ Route::post('save_settings',array('as'=>'save_settings','uses'=>'WebController@s
 Route::post('unblock_vehicle', 'PoliceController@unblock');
 Route::post('block_vehicle', 'PoliceController@block');
 Route::post('toll_amount','TransactionController@toll_amount');
+Route::get('create',array('as'=>'create','uses'=>'AdminController@create'));
+
 
 Route::get('transaction/show','TransactionController@show');
+Route::resource('transaction','TransactionController');
+Route::resource('external_transaction','ExternalTransactionController');
+
+Route::get('getdetails/{id}',array('as'=>'getdetails','uses'=>'AdminController@getdetails'));
+Route::get('delete/{id}',array('as'=>'getdetails','uses'=>'AdminController@delete'));
 
 Route::get('textrecognition', 'GcloudController@index');
+Route::post('editdetails',array('as'=>'editdetails','uses'=>'AdminController@editdetails'));

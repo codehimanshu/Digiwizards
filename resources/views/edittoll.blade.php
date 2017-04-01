@@ -12,142 +12,75 @@
         @include('leftnavigation_admin')
         <div id="page-wrapper" class="gray-bg dashbard-1">
             @include('topnavigation')
-            <div class="wrapper wrapper-content animated fadeIn">
+           
 
 
-               <div class="row">
 
-                 <div class="col-lg-3">
-                    <div class="widget style1 red-bg">
-                        <div class="row">
-                            <div class="col-xs-4 text-center">
-                                <i class="fa fa-automobile fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> Total Tolls</span>
 
-                                <h2 class="font-bold">1000</h2>
-                            </div>
+             <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            
+                            <b>Edxit Toll</b>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="widget style1 navy-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-inr fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> Today income</span>
-                                <h2 class="font-bold">&#8377;10000</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="widget style1 lazur-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-male fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span>RFID customers</span>
-                                <h2 class="font-bold">100</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="widget style1 yellow-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-mobile fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span>Normal customers</span>
-                                <h2 class="font-bold">100</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="ibox-content">
+                            <form  class="form-horizontal" action = "{{URL::route('editdetails')}}" method = "post">
+                           {{csrf_field()}}
+                            
+                               <input type="text" name="id" value="{{$toll->id}}" hidden>
+                                    
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Name</label>
 
+                                    <div class="col-sm-10"><input type="name" class="form-control" name="name" value="{{$user->name}}"></div>
+                                </div>
+                                  <div class="form-group"><label class="col-sm-2 control-label">Email</label>
 
+                                    <div class="col-sm-10"><input type="email" class="form-control" name="email" value="{{$user->email}}"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Password</label>
 
+                                    <div class="col-sm-10"><input type="password" class="form-control" name="password" ></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">Toll Name</label>
 
-            <div class="p-w-md m-t-sm">
-                <div class="row">
+                                    <div class="col-sm-10"><input type="tollname" class="form-control" name="tollname" value="{{$toll->name}}"></div>
+                                </div>
+                                  <div class="form-group"><label class="col-sm-2 control-label">Latitude</label>
 
+                                    <div class="col-sm-10"><input type="latitude" class="form-control" name="latitude" value="{{$toll->latitude}}"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Longitude</label>
 
-                    <div class="col-sm-4">
-                    </div>
+                                    <div class="col-sm-10"><input type="Longitude" class="form-control" name="longitude" value="{{$toll->longitude}}"></div>
+                                </div>
 
-                    <div class="col-sm-4 text-center">
-                    
-                        <table class="table small m-t-sm">
+                                
+                                <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">Address</label>
 
-                        </table>
+                                    <div class="col-sm-10"><input type="address" class="form-control" name="address" value="{{$toll->address}}"></div>
+                                </div>
+                                  <div class="form-group"><label class="col-sm-2 control-label">type</label>
 
+                                    <div class="col-sm-10"><input type="type" class="form-control" name="type"  value="{{$toll->type}}"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Next city</label>
 
+                                    <div class="col-sm-10"><input type="next_city" class="form-control" name="next_city" value="{{$toll->next_city}}"></div>
+                                </div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">Previous city</label>
 
-                    </div>
-
-                </div>
-
-
-               
-
-
-                <div class="wrapper wrapper-content animated fadeIn">
-                   <div class="signup-form" id="error">
-                  
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ibox">
-                            <div class="ibox-title">
-                                <h5>Transactions</h5>
-                            </div>
-                            <div class="ibox-content">
-                                <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                                placeholder="Search in table">
-
-                                <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
-                                    <thead>
-                                        <tr>
-                                            <th>Toll Name</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if(count($tolls))
-                                        @foreach($tolls as $toll)
-                                        <tr class="gradeX">
-                                           <td> {{$toll->name}}</td>
-                                            <td><a href="{{URL::to('/getdetails/'.$toll->id)}}" class="btn btn-default">edit</a>
-                                                <a href="{{URL::to('/delete/'.$toll->id)}}" class="btn btn-danger">delete</a>
-                                            </td>
-
-                                        </tr>
-                                        @endforeach
-                                        @else
-                                        <tr class="gradeX">
-                                            <td colspan="6"><center>NO TRANSACTIONS DONE YET</center></td>
-                                        </tr>
-                                        @endif
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="6">
-                                                <ul class="pagination pull-right"></ul>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                    <div class="col-sm-10"><input type="previous_city" class="form-control" name="previous_city" value="{{$toll->previous_city}}"></div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
 
+                                
+                            </form>
                         </div>
                     </div>
                 </div>

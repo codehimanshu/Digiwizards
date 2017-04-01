@@ -24,15 +24,22 @@
                 <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
             </li>
             @endif
+              @if(Request::path() == 'create')
+
             <li class="active">
-                <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Create new toll</span></a>
+                <a href="{{URL::route('create')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Create new toll</span></a>
             </li>
+            @else
+
+            <li >
+                <a href="{{URL::route('create')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Create new toll</span></a>
+            </li>
+            @endif
+           
              <li class="active">
                 <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Edit toll</span></a>
             </li>
-             <li class="active">
-                <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">View Tolls</span></a>
-            </li>
+             
              <li class="active">
                 <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Check Prices</span></a>
             </li>
