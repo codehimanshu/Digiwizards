@@ -16,7 +16,7 @@
 
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg" style="background-image: url('/img/bg.jpg'); background-size: cover;">
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
