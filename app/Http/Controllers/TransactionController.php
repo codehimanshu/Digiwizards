@@ -39,7 +39,7 @@ class TransactionController extends Controller
     {
         $data = $request->all();
         $transaction = new Transaction;
-        $vehicle = Vehicle::where('vehicle_number',$data['vehicle_number'])->first();
+        $vehicle = Vehicle::where('vehicle_no',$data['vehicle_number'])->first();
         $transaction->user_id = $vehicle->user_id;
         $transaction->vehicle_id = $vehicle->id;
         $transaction->toll_user_id = $data['toll_user_id'];
@@ -70,6 +70,8 @@ class TransactionController extends Controller
 }
 
     /**
+     * 
+     */
      * Display the specified resource.
      *
      * @param  int  $id
