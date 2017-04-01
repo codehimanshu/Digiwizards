@@ -117,7 +117,8 @@ class GeoLocationController extends Controller
             if($response <= $distance){
                 $relevent[] = $t;
             }
-        } 
+        }
+        return json_encode($relevent); 
     }
 }
     
