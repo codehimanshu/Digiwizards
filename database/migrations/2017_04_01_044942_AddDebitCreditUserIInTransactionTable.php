@@ -13,9 +13,10 @@ class AddDebitCreditUserIInTransactionTable extends Migration
      */
     public function up()
     {
-         Schema::table('tollplazafares', function ($table) {
+         Schema::table('transactions', function ($table) {
             $table->integer('toll_user_id')->unsigned();
             $table->foreign('toll_user_id')->references('id')->on('users')->onDelete('cascade');            
+          
         });
     }
 
