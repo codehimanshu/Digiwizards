@@ -18,6 +18,8 @@ use Session;
 use App\Rto;
 use App\TollPlazaFares;
 use App\TollPlaza;
+use App\User;
+
 class TollController extends BaseController
 {
 	public function __construct()
@@ -33,16 +35,14 @@ class TollController extends BaseController
 
 
 			$action="Dashboard";
-			$transactions = Transaction::where('user_id',Auth::user()->id)->get();
+			$transactions = Transaction::where('toll_user_id',Auth::user()->id)->get();
 			foreach ($transactions as $trans) {
 				$user = User::where('id', $trans->user_id)->first();
 				$vehicle = Vehicle::where('id',$trans->vehicle_id)->first();
 				$trans->user=$user;
 				$trans->vehicle = $vehicle;
-				$rto=Rto::where('vehicle_number',$vehicle->vehicle_number)->first();
+				$rto=Rto::where('vehicle_no',$vehicle->vehicle_no)->first();
 				$trans->rto=$rto;
-
-					
 			}
 			return View::make('dashboard_toll', compact('action','transactions'));
 		

@@ -159,14 +159,13 @@
                                         @if($transactions)
                                         @foreach($transactions as $t)
                                         <tr class="gradeX">
-                                           <!-- <td> <a href = "{{URL::route('customers',$t->customer_id)}}">{{$t->customer}}</a></td> -->
                                             <td>{{$t->rto->classification}}</td>
                                             <td>{{$t->user->name}}</td>
-                                            <td>{{$t->vehicle->vehicle_number}}</td>
+                                            <td>{{$t->vehicle->vehicle_no}}</td>
                                           
                                             <td class="center">{{$t->mode_of_payment}}</td>
                                             <td class="center">{{$t->amount}}</td>
-                                            <td class="center">{{$t->created_at}}</td>
+                                            <td class="center">{{$t->date}}</td>
 
 
                                         </tr>
