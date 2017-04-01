@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ Transaction;
+use App\ Vehicle;
+use App\ TollPlaza;
 
 class TransactionController extends Controller
 {
@@ -36,7 +38,6 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-       // if($data['return'])  //return journey
         $transaction = new Transaction;
         $transaction->user_id = $data['user_id'];
         $transaction->vehicle_id = $data['vehicle_id'];
@@ -45,12 +46,28 @@ class TransactionController extends Controller
         $transaction->mode_of_payment = $data['mode_of_payment'];
         $transaction->route = $data['route'];
         $transaction->date = $data['date'];
-        if($transaction->save())
-            return 1;
-        else 
-            return 0;
+        if($transaction->save()){
+           if($data['return']){     //return journey
+             $transaction = new Transaction;
+             $transaction->user_id = $data['user_id'];
+             $transaction->vehicle_id = $data['vehicle_id'];
+             $transaction->toll_user_id = $data['toll_user_id'];
+             $transaction->amount = $data['amount'];
+             $transaction->mode_of_payment = $data['mode_of_payment'];
+             $transaction->route = $data['route'];
+             $transaction->date = $data['date'];
+             if($transaction->save())
+                return 1;
+            else return 0;
 
+        }
+        else return 1;
     }
+    return 1;
+    else 
+        return 0;
+
+}
 
     /**
      * Display the specified resource.
@@ -96,4 +113,14 @@ class TransactionController extends Controller
     {
         //
     }
+    public function toll_amount(Request $request){
+        $tolls = json_decode($request->get('tolls'));
+        $vehicle_id = $request->get('vehicle_id');
+        $vehicle = Vehicle::find($vehicle_id);
+        $total_cost = 0;
+        foreach ($tolls as $toll) {
+            $total_cost += TollPlaza::where('id', $toll->id)->first()->fare;
+        }
+        return $total_cost;
+    }   
 }

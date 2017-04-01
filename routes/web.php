@@ -47,5 +47,5 @@ Route::post('save_settings',array('as'=>'save_settings','uses'=>'WebController@s
 
 Route::post('unblock_vehicle', 'PoliceController@unblock');
 Route::post('block_vehicle', 'PoliceController@block');
-
+Route::post('toll_amount','TransactionController@toll_amount');
 

@@ -42,12 +42,9 @@
                                 <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
                                     <thead>
                                         <tr>
-                                            <th>Vehicle type</th>
-                                            <th>User Name</th>
-                                            <th >Vehicle Name</th>
-                                            <th >Mode of Payment</th>
-                                            <th >Cost</th>
-                                            <th>Date</th>
+                                            <th>Vehicle ID</th>
+                                            <th>Vehicle No</th>
+                                            <th>Unblock</th>
                                         </tr>
                                     </thead>
                                     <tbody>
