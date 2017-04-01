@@ -63,7 +63,7 @@ class TransactionController extends Controller
              $transaction->route = $data['route'];
              $transaction->date = $data['date'];
              $user =  User::find($vehicle->user_id);
-             $user->card_balance  floatval($user->card_balance) - floatval($data['amount']);
+             $user->card_balance = floatval($user->card_balance) - floatval($data['amount']);
              $user->save();
              if($transaction->save())
                 return 1;
