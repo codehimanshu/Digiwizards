@@ -3,7 +3,10 @@
 
 <head>
     @include('header')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <script src="{{asset('js/blocking.js')}}" type=""></script>
 
 </head>
 
@@ -109,10 +112,10 @@
                                     <tbody>
                                         @if($blocked)
                                         @foreach($blocked as $block)
-                                        <tr class="gradeX">
+                                        <tr class="gradeX" id="row_{{$block->blocked_id}}">
                                             <td>{{$block->blocked_id}}</td>
                                             <td>{{$block->vehicle_no}}</td>
-                                            <td></td>
+                                            <td><button class="unblock_vehicle" id="{{$block->blocked_id}}">Unblock</button></td>
                                           
                                             <td class="center"></td>
                                             <td class="center"></td>
