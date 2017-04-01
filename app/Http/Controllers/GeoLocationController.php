@@ -13,7 +13,7 @@ class GeoLocationController extends Controller
      */
     public function index()
     {
-/*
+    /*
     $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
              ['lat' => 25.774, 'lng' => -80.190], // point array [lat, lng]
              [ // poligon arrays of [lat, lng]
@@ -25,44 +25,30 @@ class GeoLocationController extends Controller
        dd($response);*/
    }
 
-   public function testing (Request $request){
-    return "le ".$request->src_lat;
-   }
-    public function storetest(Request $request)
-    {
-            
-        // return 'hell';            
-        // return json_encode($request->all());
+  public function storetest(Request $request)
+   {
+        $data = $request->all();
+        $decoded_polyline = json_decode($data['polyline'],true);
         $toll_plaza_model = new TollPlaza;
-        $tolls = $toll_plaza_model->filter_tolls($request->src_lat,$request->src_lng,$request->dest_lat,$request->dest_lng);
+        $tolls = $toll_plaza_model->filter_tolls($data['src_lat'],$data['src_lng'],$data['dest_lat'],$data['dest_lng']);
         $on_path_tolls = array();
-        // var_dump($request->src_lat);
-        // return $request->src_lat;
-        // return json_encode($request->polyline);  
-        $polyline= json_decode($request->polyline);
-        return $polyline;
-// >>>>>>> 1b2442899861fcabbc091d10c35cbbbd8a981427
+        dd($tolls);
         foreach ($tolls as $toll) {
         $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
               ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
-             /*
-             [ // poligon arrays of [lat, lng]
-             ['lat' => 25.774, 'lng' => -80.190], 
-             ['lat' => 18.466, 'lng' => -66.118], 
-             ['lat' => 32.321, 'lng' => -64.757]
-             ]*/
-             $polyline
-
-             );
-            
-            echo $response;
-
-            if($response)
-                array_push($on_path_tolls, $toll);
-        }
-        return json_encode($on_path_tolls);
-    }
-
+                $decoded_polyline
+               /* [ // poligon arrays of [lat, lng]
+                ['lat' => 25.774, 'lng' => -80.190], 
+                ['lat' => 18.466, 'lng' => -66.118], 
+                ['lat' => 32.321, 'lng' => -64.757]
+                ]*/
+            );
+        return $toll->latitude . "  ". $toll->longitude;
+           if($response)
+               array_push($on_path_tolls, $toll);
+       }
+       return json_encode($on_path_tolls);
+   }
     /**
      * Show the form for creating a new resource.
      *
