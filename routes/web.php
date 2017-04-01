@@ -19,6 +19,7 @@ Route::get('/', function () {
 // RFID APIs
 Route::group(['prefix' => 'rfid'], function () {
 	Route::get('checkpayment', 'RFIDController@check_for_payment');
+	Route::get('fetchdata', 'RFIDController@getdata');
 });
 
 Route::group(['prefix' => 'app'], function () {
