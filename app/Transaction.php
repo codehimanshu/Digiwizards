@@ -1,48 +1,53 @@
 <?php
 
 namespace App;
+use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
 	protected $fillable = [
-	'user_id', 'vehicle_id', 'amount','status', 'mode_of_payment','route'
+	'user_id', 'vehicle_id', 'amount','status', 'mode_of_payment','route','date'
 	];
 	public $table = "transactions";
-	public function check_for_payment($vehicle,$date,$toll_id,$data){
-		$to_time = strtotime($date);
-		$from_time = strtotime();
-		$diff= round(abs($to_time - $from_time) / 60,2);
-		if($diff<24*60){
-			$data = self::where(['status','1'],
-							['vehicle_id',$vehicle])->get();
-			if(!empty($data)){
-				$toll_list = $data[0]->route;
-				$toll_list_arr = json_decode($toll_list);
-				$key=array_search($toll_id,$toll_list_arr)
-				if($key!=false){
-					//payment made for this toll
-					unset($toll_list_arr[$key]);
-					$toll_list= json_encode($toll_list_arr);
-					$data[0]->route = $toll_list;
-					$data->save();
-					return 1;
+	public function check_for_payment($vehicle_no,$toll_id){
+		$datas = self::join('vehicles','vehicles.id','=','transactions.vehicle_id')->where('transactions.status','1')->where('vehicles.vehicle_no',$vehicle_no)->get();
+		if(!empty($datas)){
+			foreach($datas as $data)
+			{
+				$journey_time = $data->date;
+				$journey_time = new Carbon($journey_time);
+				$arrival_time = Carbon::now();
+				$diff= $journey_time->diff($arrival_time)->days;
+				if($diff<1){
+					$toll_list = $data->route;
+					$toll_list_arr = json_decode($toll_list,true);
+					// var_dump($toll_list_arr);
+					$key=array_search($toll_id,$toll_list_arr);
+					if(is_numeric($key)){
+						//payment made for this toll
+						unset($toll_list_arr[$key]);
+						$toll_list_obj = (object) $toll_list_arr;
+						$toll_list= json_encode($toll_list_obj);
+						$data->route = $toll_list;
+						$data->save();
+						return 1;
+					}
+					else{
+						//payment not made for this toll
+						continue;
+					}
 				}
 				else{
-					//payment not made for this toll
-					return 0;
+					//not for this time
+					continue;
 				}
-			}
-			else
-			{
-				//no payment
-				return 0;
 			}
 		}
 		else{
-			//timeout
-			return 0;
+			//no payment
+			return "NO pay";
 		}
 		return 0;
 	}  

@@ -15,3 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('geolocation','GeoLocationController');
+
+// RFID APIs
+Route::get('checkpayment', 'RFIDController@check_for_payment');
