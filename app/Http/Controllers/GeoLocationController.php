@@ -30,7 +30,6 @@ class GeoLocationController extends Controller
         $toll_plaza_model = new TollPlaza;
         $tolls = $toll_plaza_model->filter_tolls($request->src_lat,$request->src_lng,$request->dest_lat,$request->dest_lng);
         $on_path_tolls = array();
-        return "Helo";
         return $request->polyline;
         foreach ($tolls as $toll) {
         $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(

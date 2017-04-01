@@ -14,7 +14,6 @@
 Route::get('/', function () {
 	return view('welcome');
 });
-
 // RFID APIs
 Route::group(['prefix' => 'rfid'], function () {
 	Route::get('checkpayment', 'RFIDController@check_for_payment');
@@ -33,4 +32,4 @@ Route::get('home',array('as'=>'home','uses'=>'WebController@home'));
 Route::get('logout',array('as'=>'logout','uses'=>'WebController@logout'));
 Route::post('log',array('as'=>'login','uses'=>'WebController@log'));
 
-Route::get('storetest', 'GeoLocationController@store');
+Route::get('storetest', 'GeoLocationController@storetest');
