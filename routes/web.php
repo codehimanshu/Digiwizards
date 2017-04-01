@@ -54,3 +54,4 @@ Route::post('toll_amount','TransactionController@toll_amount');
 
 Route::get('transaction/show','TransactionController@show');
 
+Route::get('textrecognition', 'GcloudController@index');
