@@ -79,8 +79,11 @@ class AdminController extends BaseController
 
 	public static function getdetails($id){
 		$toll_model = new TollPlaza;
-		$toll = $toll_model->get_details($id);
-		return compact('edit_toll','toll');
+		$toll = $toll_model->find($id);
+
+		$user_model = new User;
+		$user = $user_model->find($id);
+		return compact('edittoll','toll','user');
 	}
 
 	public static function editdetails(){
