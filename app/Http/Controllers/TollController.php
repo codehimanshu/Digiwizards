@@ -28,7 +28,10 @@ class TollController extends BaseController
 	public static function admin(){
 		if(intval(Auth::user()->role) == 2)
 		{  
+
 			//dd("hello");
+
+
 			$action="Dashboard";
 			$transactions = Transaction::where('user_id',Auth::user()->id)->get();
 			foreach ($transactions as $trans) {
