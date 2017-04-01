@@ -15,68 +15,6 @@
         @include('leftnavigation')
         <div id="page-wrapper" class="gray-bg dashbard-1">
             @include('topnavigation')
-            <div class="wrapper wrapper-content animated fadeIn">
-
-
-               <div class="row">
-
-                 <div class="col-lg-3">
-                    <div class="widget style1 red-bg">
-                        <div class="row">
-                            <div class="col-xs-4 text-center">
-                                <i class="fa fa-automobile fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> Total cars passed</span>
-
-                                <h2 class="font-bold">Cars</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="widget style1 navy-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-inr fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> Today income</span>
-                                <h2 class="font-bold">&#8377; </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="widget style1 lazur-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-male fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span>Registered customers</span>
-                                <h2 class="font-bold"></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="widget style1 yellow-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-mobile fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> Registered Devices</span>
-                                <h2 class="font-bold"></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
 
             <div class="p-w-md m-t-sm">
              

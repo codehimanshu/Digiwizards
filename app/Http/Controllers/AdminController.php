@@ -16,6 +16,7 @@ use Session;
 use App\TollPlaza;
 use App\TollPlazaFares;
 use App\Transaction;
+use App\Blocking;
 
 class AdminController extends BaseController
 {
@@ -24,23 +25,17 @@ class AdminController extends BaseController
 		if(intval(Auth::user()->role) == 5)
 		{  
 
-			//dd("hello");
-
-
 			$action="Dashboard";
 			$toll=TollPlaza::all();
 			$transactions = Transaction::all();
-			return View::make('dashboard_admin', compact('action','toll','transactions'));
-		
-		
+
+	    	$blocking_model = new Blocking;
+	    	$blocked = $blocking_model->getAllBlocked();
+
+			return View::make('dashboard_admin', compact('action','toll','transactions','blocked'));
 		}
 		else{
-		return Redirect::route('home');
-
+			return Redirect::route('home');
+		}	
 	}
-	}
-
-	
-
-
 }
