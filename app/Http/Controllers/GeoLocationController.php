@@ -29,7 +29,22 @@ class GeoLocationController extends Controller
     {
         $toll_plaza_model = new TollPlaza;
         $tolls = $toll_plaza_model->filter_tolls($request->src_lat,$request->src_lng,$request->dest_lat,$request->dest_lng);
-        return var_dump($tolls);
+        $on_path_tolls = array();
+        return "Helo";
+        return $request->polyline;
+        foreach ($tolls as $toll) {
+        $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
+              ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
+             [ // poligon arrays of [lat, lng]
+             ['lat' => 25.774, 'lng' => -80.190], 
+             ['lat' => 18.466, 'lng' => -66.118], 
+             ['lat' => 32.321, 'lng' => -64.757]
+             ]);
+
+            if($response)
+                array_push($on_path_tolls, $toll);
+        }
+        return json_encode($on_path_tolls);
     }
 
     /**
@@ -55,6 +70,7 @@ class GeoLocationController extends Controller
         $toll_plaza_model = new TollPlaza;
         $tolls = $toll_plaza_model->filter_tolls($request->src_lat,$request->src_lng,$request->dest_lat,$request->dest_lng);
         $on_path_tolls = array();
+        return $request->polyline;
         foreach ($tolls as $toll) {
         $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
               ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
