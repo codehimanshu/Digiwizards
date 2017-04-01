@@ -51,4 +51,8 @@ class Transaction extends Model
 		}
 		return 0;
 	}  
+
+	public function get_all_transactions($user_id){
+		return self::where('user_id',$user_id)->get();
+	}
 }
