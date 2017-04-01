@@ -6,7 +6,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use User;
+use App\User;
+use Hash;
 use View;
 use Illuminate\Support\Facades\Input;
 use Redirect;
@@ -58,9 +59,11 @@ class AdminController extends BaseController
 		$user->name=$data['name'];
 		$user->email=$data['email'];
 		$user->password=Hash::make($data['password']);
+		$user->card_balance=0;
 		$user->role='2';
 		$user->save();
 		$toll=new TollPlaza;
+		$toll->user_id = $user->id;
 		$toll->name=$data['tollname'];
 		$toll->latitude=$data['latitude'];
 		$toll->longitude=$data['longitude'];
@@ -68,6 +71,7 @@ class AdminController extends BaseController
 		$toll->next_city=$data['next_city'];
 		$toll->previous_city=$data['previous_city'];
 		$toll->address=$data['address'];
+		$toll->status=0;
 		$toll->save();
 
 		return Redirect::to('dashboard')->with('message','Successfully saved');
