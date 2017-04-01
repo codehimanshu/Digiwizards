@@ -53,4 +53,6 @@ Route::post('block_vehicle', 'PoliceController@block');
 Route::post('toll_amount','TransactionController@toll_amount');
 
 Route::get('transaction/show','TransactionController@show');
+Route::resource('transaction','TransactionController');
+Route::resource('external_transaction','ExternalTransactionController');
 
