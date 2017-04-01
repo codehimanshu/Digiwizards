@@ -61,7 +61,8 @@ class WebController extends BaseController
 			}
 			else
 			if(Auth::user()->role==6){
-				return PoliceController::dashboard();
+				$police_model = new PoliceController;
+				return $police_model->dashboard();
 			}	
 			/*else{
 				return DealerController::dealers();
