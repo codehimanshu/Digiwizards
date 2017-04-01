@@ -2,12 +2,12 @@
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
-                <div class="dropdown profile-element"> <span>
-                    <img alt="image" src="{{URL::asset('img/bpcl.png')}}"/>
-                </span>
+                <div class="dropdown profile-element"> <center><span>
+                    <img alt="image" src="{{URL::asset('img/bpcl.png')}}" height="70px" />
+                </span></center>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Welcome {{Auth::user()->name}}</strong>
-                    </span> <span class="text-muted text-xs block"></span> </span> </a>
+                    <center><span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Welcome {{Auth::user()->name}}</strong>
+                    </span></span> <span class="text-muted text-xs block"></span> </span> </a>
                     
                 </div>
                 <div class="logo-element">
@@ -40,7 +40,7 @@
     </nav>
 
             <div class="modal inmodal fade" id="check" tabindex="-1" role="dialog"  aria-hidden="true">
-                <div class="modal-dialog modal-sm">
+                <div class="modal-dialog modal-md">
                     <form action = "{{URL::route('save_settings')}}" method = "post">
 
                         <div class="modal-content">
@@ -48,7 +48,7 @@
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                 <h4 class="modal-title">Settings</h4>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body" style="min-height: 200px;">
                                 {{csrf_field()}}
                                 <p><strong>Kindly Enter The Following Details</strong> </p>
                                 <div class="form-group"><label class="col-sm-4 control-label">3-Wheeler Price</label>
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                                                           
-                                                          </div>
+                            </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
