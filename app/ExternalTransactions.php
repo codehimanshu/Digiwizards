@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class ExternalTransactions extends Model
 {
-	protected $fillable = [
+protected $fillable = [
 	'user_id', 'vehicle_id', 'amount','status', 'mode_of_payment','route'
 	];
-	public $table = "transactions";    
+	public $table = "external_transactions";    
 }
