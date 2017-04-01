@@ -32,22 +32,17 @@ class GeoLocationController extends Controller
         $toll_plaza_model = new TollPlaza;
         $tolls = $toll_plaza_model->filter_tolls($data['src_lat'],$data['src_lng'],$data['dest_lat'],$data['dest_lng']);
         $on_path_tolls = array();
-        dd($tolls);
-        foreach ($tolls as $toll) {
-        $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
+        //dd($tolls->toArray());
+        /*foreach ($tolls as $toll) {
+        $response =  \GeometryLibrary\PolyUtil::isLocationOnEdge(
               ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
-                $decoded_polyline
-               /* [ // poligon arrays of [lat, lng]
-                ['lat' => 25.774, 'lng' => -80.190], 
-                ['lat' => 18.466, 'lng' => -66.118], 
-                ['lat' => 32.321, 'lng' => -64.757]
-                ]*/
+                $decoded_polyline,0.1
+             
             );
-        return $toll->latitude . "  ". $toll->longitude;
            if($response)
                array_push($on_path_tolls, $toll);
-       }
-       return json_encode($on_path_tolls);
+       }*/
+       return json_encode($tolls);
    }
     /**
      * Show the form for creating a new resource.
