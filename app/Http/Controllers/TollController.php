@@ -13,10 +13,11 @@ use Redirect;
 use Validator;
 use Auth;
 use App\Transaction;
+use App\Vehicle;
 use Session;
+use App\Rto;
 class TollController extends BaseController
 {
-	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 	public function __construct()
 	{
 		$this->middleware('auth');
@@ -25,9 +26,23 @@ class TollController extends BaseController
 	public static function admin(){
 		if(Auth::user()-> role == 1)
 		{  
-			$transaction = 
-			
+			$action="Dashboard";
+			$transactions = Transaction::where('user_id',Auth::user()->id)->get();
+			foreach ($transactions as $trans) {
+				$user = User::where('id', $trans->user_id)->first();
+				$vehicle = Vehicle::where('id',$trans->vehicle_id)->first();
+				$trans->user=$user;
+				$trans->vehicle = $vehicle;
+				$rto=Rto::where('vehicle_number',$vehicle->vehicle_number)->first();
+				$trans->rto=$rto;
+			}
+			return View::make('dashboard_toll', compact('action','transactions'));
+		
 		}
+		else{
+		return Redirect::route('home');
+
+	}
 	}
 	
 	
