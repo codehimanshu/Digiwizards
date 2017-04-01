@@ -2,6 +2,7 @@
 
 namespace App;
 use Carbon\Carbon;
+use DB;	
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,7 +32,8 @@ class Transaction extends Model
 						$toll_list_obj = (object) $toll_list_arr;
 						$toll_list= json_encode($toll_list_obj);
 						$data->route = $toll_list;
-						$data->save();
+						DB::table('transactions')->where('id',$data->id)->update(['route'=>$toll_list]);
+						// $data->save();
 						return 1;
 					}
 					else{

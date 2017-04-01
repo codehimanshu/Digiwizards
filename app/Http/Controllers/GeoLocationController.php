@@ -57,7 +57,7 @@ class GeoLocationController extends Controller
         $on_path_tolls = array();
         foreach ($tolls as $toll) {
         $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
-              ['lat' => $toll->lat, 'lng' => -80.190], // point array [lat, lng]
+              ['lat' => $toll->latitude, 'lng' => $toll->longitude], // point array [lat, lng]
              [ // poligon arrays of [lat, lng]
              ['lat' => 25.774, 'lng' => -80.190], 
              ['lat' => 18.466, 'lng' => -66.118], 
@@ -65,7 +65,7 @@ class GeoLocationController extends Controller
              ]);
 
             if($response)
-                array_push($on_path_tolls, $toll->id);
+                array_push($on_path_tolls, $toll);
         }
         return json_encode($on_path_tolls);
 }
