@@ -115,8 +115,8 @@ class TransactionController extends Controller
     }
     public function toll_amount(Request $request){
         $tolls = json_decode($request->get('tolls'));
-        $vehicle_id = $request->get('vehicle_id');
-        $vehicle = Vehicle::find($vehicle_id);
+        $vehicle_number = $request->get('vehicle_number');
+        $vehicle = Vehicle::where('vehicle_number',$vehicle_number)->first();
         $total_cost = 0;
         foreach ($tolls as $toll) {
             $total_cost += TollPlaza::where('id', $toll->id)->first()->fare;
