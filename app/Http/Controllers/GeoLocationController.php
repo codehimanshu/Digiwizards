@@ -13,7 +13,7 @@ class GeoLocationController extends Controller
      */
     public function index()
     {
-
+/*
     $response =  \GeometryLibrary\PolyUtil::isLocationOnPath(
              ['lat' => 25.774, 'lng' => -80.190], // point array [lat, lng]
              [ // poligon arrays of [lat, lng]
@@ -22,7 +22,7 @@ class GeoLocationController extends Controller
              ['lat' => 32.321, 'lng' => -64.757]
              ]);  
 
-       dd($response);
+       dd($response);*/
    }
 
     public function storetest(Request $request)
