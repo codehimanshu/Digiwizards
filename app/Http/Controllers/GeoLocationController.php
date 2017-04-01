@@ -25,6 +25,13 @@ class GeoLocationController extends Controller
      dd($response);
  }
 
+    public function storetest(Request $request)
+    {
+        $toll_plaza_model = new TollPlaza;
+        $tolls = $toll_plaza_model->filter_tolls($request->src_lat,$request->src_lng,$request->dest_lat,$request->dest_lng);
+        return var_dump($tolls);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
