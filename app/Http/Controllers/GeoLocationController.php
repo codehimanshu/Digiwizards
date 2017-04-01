@@ -28,6 +28,7 @@ class GeoLocationController extends Controller
   public function storetest(Request $request)
    {
         $data = $request->all();
+        dd($data);
         $decoded_polyline = json_decode($data['polyline'],true);
         $toll_plaza_model = new TollPlaza;
         $tolls = $toll_plaza_model->filter_tolls($data['src_lat'],$data['src_lng'],$data['dest_lat'],$data['dest_lng']);
