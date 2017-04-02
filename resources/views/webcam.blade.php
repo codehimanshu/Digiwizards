@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>WebcamJS Test Page</title>
+    <title>InstaToll</title>
     <style type="text/css">
         body { font-family: Helvetica, sans-serif; }
         h2, h3 { margin-top:0; }
@@ -15,8 +15,7 @@
 <body>
     <div id="results">Your captured image will appear here...</div>
     
-    <h1>WebcamJS Test Page</h1>
-    <h3>Demonstrates setting up camera after a click.</h3>
+    <h1>InstaToll Image Recognition System</h1>
     
     <div id="my_camera"></div>
     
@@ -27,8 +26,8 @@
     <!-- Configure a few settings and attach camera -->
     <script language="JavaScript">
         Webcam.set({
-            width: 320,
-            height: 240,
+            width: 500,
+            height: 400,
             image_format: 'jpeg',
             jpeg_quality: 90
         });
@@ -63,8 +62,8 @@
                       },
                       // important POST method !
                       type:"post",
-                      complete:function(){
-                        alert("image Uploaded");
+                      success:function(){
+                        window.location = "http://localhost:8000/textrecognition";
                       }
                     });
 
