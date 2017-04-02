@@ -29,7 +29,7 @@ class GeoLocationController extends Controller
    {
         $data = $request->all();
         // dd($data);
-        $decoded_polyline = json_decode($data['polyline'],true);
+        // $decoded_polyline = json_decode($data['polyline'],true);
         $toll_plaza_model = new TollPlaza;
         $tolls = $toll_plaza_model->filter_tolls($data['src_lat'],$data['src_lng'],$data['dest_lat'],$data['dest_lng']);
         $on_path_tolls = array();

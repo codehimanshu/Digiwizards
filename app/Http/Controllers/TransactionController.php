@@ -46,14 +46,13 @@ class TransactionController extends Controller
         $transaction->toll_user_id = 1;
         $transaction->amount = $data['amount'];
         $transaction->mode_of_payment = $data['mode_of_payment'];
-        $transaction->transaction_id = $data['transaction_id'];
         $transaction->route = $data['route'];
         $transaction->date = $data['date'];
         $user =  User::find($vehicle->user_id);
-        $user->card_balance -= $data['amount'];
+        $user->card_balance = floatval($user->card_balance) - floatval($data['amount']);
         $user->save(); 
         if($transaction->save()){
-           if($data['return']){     //return journey
+           if(!$data['one_way']){     //return journey
              $transaction = new Transaction;
              $transaction->user_id = $vehicle->user_id;
              $transaction->vehicle_id = $vehicle->id;
@@ -132,10 +131,16 @@ class TransactionController extends Controller
         $total_cost = 0;
         foreach ($tolls as $toll) {
             $TollPlazaFares =TollPlazaFares::where('tollplaza_id', $toll)->where('vehicle_type',$vehicle->type)->first();
-
             if($TollPlazaFares) 
                 $total_cost +=  $TollPlazaFares->fare;
         }
-        return json_encode(['total_cost'=>$total_cost,'card_balance'=>$user->card]);
+        if(!$request->get('one_way')){
+         foreach ($tolls as $toll) {
+            $TollPlazaFares =TollPlazaFares::where('tollplaza_id', $toll)->where('vehicle_type',$vehicle->type)->first();
+            if($TollPlazaFares) 
+                $total_cost +=  $TollPlazaFares->returnfare;
+        }   
+        }
+        return json_encode(['total_cost'=>$total_cost,'card_balance'=>$user->card_balance]);
     }   
 }

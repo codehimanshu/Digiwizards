@@ -60,10 +60,16 @@ Route::get('transaction/show','TransactionController@show');
 Route::resource('transaction','TransactionController');
 Route::resource('external_transaction','ExternalTransactionController');
 
+
+Route::get('view_webcam','WebCamController@view');
+Route::post('upload_image','WebCamController@postImages');
+
 Route::get('getdetails/{id}',array('as'=>'getdetails','uses'=>'AdminController@getdetails'));
 Route::get('delete/{id}',array('as'=>'getdetails','uses'=>'AdminController@delete'));
 
 Route::get('textrecognition', 'GcloudController@index');
 Route::post('editdetails',array('as'=>'editdetails','uses'=>'AdminController@editdetails'));
+
 Route::get('checkprice',array('as'=>'checkprice','uses'=>'AdminController@checkprice'));
+
 
