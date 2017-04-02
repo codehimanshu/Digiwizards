@@ -12,7 +12,7 @@ class GcloudController extends Controller
 		$vision = new VisionClient([
 		    'projectId' => "digiwizards-163315"
 		]);
-		$path = storage_path().'/images/demo-image2.jpg';
+		$path = storage_path().'/images/image.jpg';
 		
 		$image = $vision->image(file_get_contents($path), ['TEXT_DETECTION']);
 
