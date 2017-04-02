@@ -36,23 +36,24 @@ class ExternalTransactionController extends Controller
      */
     public function store(Request $request)
     {
-     $data = $request->all();
+       $data = $request->all();
        // if($data['return'])  //return journey
-     $transaction = new ExternalTransactions;
-     $transaction->user_id = $data['user_id'];
-     $transaction->vehicle_id = 1;
-     $transaction->status = 1;
-     $transaction->card_details = "   ";
+       $data['amount']=json_decode($data['amount']);
+       $transaction = new ExternalTransactions;
+       $transaction->user_id = $data['user_id'];
+       $transaction->vehicle_id = 1;
+       $transaction->status = 1;
+       $transaction->card_details = "   ";
 
-     $transaction->amount = floatval($data['amount']);
-     $transaction->mode_of_payment = $data['mode_of_payment'];
+       $transaction->amount = floatval($data['amount']);
+       $transaction->mode_of_payment = $data['mode_of_payment'];
       //  $transaction->route = $data['route'];
-     $transaction->transaction_id = $data['transaction_id'];
+       $transaction->transaction_id = $data['transaction_id'];
        //$transaction->date = $data['date'];
-     $user =  User::find($data['user_id']);
-     $user->card_balance =  floatval($user->card_balance) + floatval($data['amount']);
-     $user->save();
-     if($transaction->save())
+       $user =  User::find($data['user_id']);
+       $user->card_balance =  floatval($user->card_balance) + floatval($data['amount']);
+       $user->save();
+       if($transaction->save())
         return 1;
     else 
         return 0;

@@ -110,6 +110,22 @@ class UserController extends Controller
             }
         }
 
-    }       
+    }  
+    public function card_balance(Request $request){
+        $user = User::find(intval($request->get('user_id')));
+        return $user->card_balance;
+    }    
+     public function add_money(Request $request){
+
+        $user = User::find(intval($request->get('user_id')));
+        $amount = floatval($request->get('amount'));
+        $user->card_balance = floatval($user->card_balance) + floatval($amount);
+        if($user->save()){
+            return $user->card_balance;
+        }
+        else
+            return 0;
+
+    }     
 
 }
