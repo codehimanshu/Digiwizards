@@ -26,7 +26,7 @@
                             <div class="col-xs-8 text-right">
                                 <span> Total cars passed</span>
 
-                                <h2 class="font-bold">Cars</h2>
+                                <h2 class="font-bold">100</h2>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-xs-8 text-right">
                                 <span> Today income</span>
-                                <h2 class="font-bold">&#8377; </h2>
+                                <h2 class="font-bold">&#8377;10000 </h2>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-xs-8 text-right">
                                 <span>Registered customers</span>
-                                <h2 class="font-bold"></h2>
+                                <h2 class="font-bold">100</h2>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-xs-8 text-right">
                                 <span> Registered Devices</span>
-                                <h2 class="font-bold"></h2>
+                                <h2 class="font-bold">108</h2>
                             </div>
                         </div>
                     </div>
