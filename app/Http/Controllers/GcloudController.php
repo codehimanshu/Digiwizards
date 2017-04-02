@@ -24,11 +24,12 @@ class GcloudController extends Controller
 
 		echo "Vehicle No:\n";
 		$no =  $result->text()[0]->description();
-		$no = str_replace(' ', '', $no );
+		$no = trim( str_replace(' ', '', $no ));
 		echo $no;
 
+		// var_dump($no);
 		$vehicle = DB::table('rto')->where('vehicle_no',$no)->first();
-		var_dump($vehicle);
+		// var_dump($vehicle);
 		echo "<br>Type: ".$vehicle->type;
 		echo "<br>Classification: ".$vehicle->classification;
 		echo "<br>Name: ".$vehicle->name;
