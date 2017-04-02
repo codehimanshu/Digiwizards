@@ -56,3 +56,5 @@ Route::get('transaction/show','TransactionController@show');
 Route::resource('transaction','TransactionController');
 Route::resource('external_transaction','ExternalTransactionController');
 
+Route::get('view_webcam','WebCamController@view');
+Route::post('upload_image','WebCamController@postImages');
