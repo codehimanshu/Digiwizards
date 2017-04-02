@@ -25,6 +25,18 @@
             </li>
             @endif
 
+            @if(Request::path() == 'dashboard')
+
+            <li class="active">
+                <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Emergency Features</span></a>
+            </li>
+            @else
+
+            <li >
+                <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Emergency Features</span></a>
+            </li>
+            @endif
+
         
             
             
