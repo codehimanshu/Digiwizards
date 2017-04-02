@@ -16,7 +16,7 @@ class WebCamController extends Controller
         $data = base64_decode($base_to_php[1]);
         //dd($data);
 // here you can detect if type is png or jpg if you want
-		$filepath = "http://localhost/Digiwizards/public/uploads/image.png"; // or image.jpg
+		$filepath = public_path()."/uploads/image.png"; // or image.jpg
 
 // Save the image in a defined path
 		$result = file_put_contents($filepath,$data);
