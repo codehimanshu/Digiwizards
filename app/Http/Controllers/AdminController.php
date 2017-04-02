@@ -123,5 +123,43 @@ class AdminController extends BaseController
 		$toll->delete();
 		return Redirect::to('dashboard')->with('message','Successfully saved');
 	}
+	/*public function checkprice(){
+		$action="DisplayList";
+		$tolls=TollPlazaFares::all();
+		foreach($tolls as $t)
+		{
+			$pricethree=TollPlazaFares::where([['vehicle_type','three'],['tollplaza_id',$t->tollplaza_id]])->first();
+				$pricefour=TollPlazaFares::where([['vehicle_type','four'],['tollplaza_id',$t->tollplaza_id]])->first();
+				$t->three=$pricethree;
+				$t->four=$pricefour;
+				$t->name=TollPlaza::where('id',$t->tollplaza_id)->first();
+
+
+
+		}
+		return View::make('checkprice', compact('action','tolls'));
+		
+
+	}*/
+
+public function checkprice(){
+		$action="DisplayList";
+		$tolls=TollPlaza::all();
+		foreach($tolls as $t)
+		{
+			$pricethree=TollPlazaFares::where([['vehicle_type','three'],['tollplaza_id',$t->id]])->first();
+				$pricefour=TollPlazaFares::where([['vehicle_type','four'],['tollplaza_id',$t->id]])->first();
+				$t->three=$pricethree;
+				$t->four=$pricefour;
+				
+
+
+
+		}
+		//dd($tolls->toArray());
+		return View::make('checkprice', compact('action','tolls'));
+		
+
+	}
 
 }
