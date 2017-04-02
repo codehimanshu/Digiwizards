@@ -61,7 +61,7 @@ class TransactionController extends Controller
                $transaction->vehicle_id = $vehicle->id;
                $transaction->toll_user_id = 1;
                $transaction->amount =floatval($data['amount']);
-               var_dump($transaction->amount);
+               //var_dump($transaction->amount);
                $transaction->mode_of_payment = $data['mode_of_payment'];
                $transaction->route = $data['route'];
                //$transaction->date = $data['date'];
