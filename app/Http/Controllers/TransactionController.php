@@ -39,6 +39,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data['amount']=json_decode($data['amount']);
         $transaction = new Transaction;
         $vehicle = Vehicle::where('vehicle_no',$data['vehicle_number'])->first();
         $transaction->user_id = $vehicle->user_id;
@@ -60,6 +61,7 @@ class TransactionController extends Controller
                $transaction->vehicle_id = $vehicle->id;
                $transaction->toll_user_id = 1;
                $transaction->amount =floatval($data['amount']);
+               var_dump($transaction->amount);
                $transaction->mode_of_payment = $data['mode_of_payment'];
                $transaction->route = $data['route'];
                //$transaction->date = $data['date'];
