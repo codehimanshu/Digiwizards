@@ -73,6 +73,7 @@ Route::post('editdetails',array('as'=>'editdetails','uses'=>'AdminController@edi
 Route::get('checkprice',array('as'=>'checkprice','uses'=>'AdminController@checkprice'));
 Route::get('userslist',array('as'=>'userslist','uses'=>'AdminController@userslist'));
 Route::post('card_balance',array('as'=>'card_balance','uses'=>'UserController@card_balance'));
+Route::post('add_money',array('as'=>'add_money','uses'=>'UserController@add_money'));
 
 
 
