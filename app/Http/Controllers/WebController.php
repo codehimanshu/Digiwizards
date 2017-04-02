@@ -50,10 +50,14 @@ class WebController extends BaseController
 
 					$toll_id = TollPlaza::where('user_id',Auth::user()->id)->first()->id;
 				//dd($toll_id);
+				$pricetwo=TollPlazaFares::where([['vehicle_type','two'],['tollplaza_id',$toll_id]])->first();
+
 
 				$pricethree=TollPlazaFares::where([['vehicle_type','three'],['tollplaza_id',$toll_id]])->first();
 				$pricefour=TollPlazaFares::where([['vehicle_type','four'],['tollplaza_id',$toll_id]])->first();
 				//dd($pricethree);
+				if($pricethree)
+				session(['pricetwo'=>$pricetwo->fare]);
 
 				if($pricethree)
 				session(['pricethree'=>$pricethree->fare]);
@@ -95,17 +99,17 @@ class WebController extends BaseController
 public function save_settings(){
 	$data = Input::all();
 	$toll_id = TollPlaza::where('user_id',Auth::user()->id)->first()->id;
+	$pricetwo=TollPlazaFares::where([['vehicle_type','two'],['tollplaza_id',$toll_id]])->first();
 	$pricethree=TollPlazaFares::where([['vehicle_type','three'],['tollplaza_id',$toll_id]])->first();
 	$pricefour=TollPlazaFares::where([['vehicle_type','four'],['tollplaza_id',$toll_id]])->first();
-
+	$pricetwo->fare=$data['pricetwo'];
 	$pricethree->fare=$data['pricethree'];
 	$pricefour->fare=$data['pricefour'];
 	$pricefour->save();
 	$pricethree->save();
-	
+	session(['pricetwo'=>$pricetwo->fare]);
 	Session::put('pricethree',$data['pricethree']);
 	Session::put('pricefour',$data['pricefour']);
-
 	Session::forget('check');
 	return Redirect::route('dashboard')->with('success','Settings Successfully Saved');
 }

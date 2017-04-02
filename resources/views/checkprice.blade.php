@@ -59,11 +59,14 @@
                                     <thead>
                                         <tr>
                                             <th>Toll Name</th>
-                                            <th>3 wheeleer price</th>
-                                            <th>3 wheeleer price Return fare</th>
+                                            <th>2 Axle price</th>
+                                            <th>2 Axle Return fare</th>
 
-                                            <th>4 wheeleer price</th>
-                                            <th>4 wheeleer price return fare</th>
+                                             <th>3 Axle price</th>
+                                            <th>3 Axle Return fare</th>
+
+                                            <th>4 Axle price</th>
+                                            <th>4 Axle price return fare</th>
 
                                         </tr>
                                     </thead>
@@ -72,24 +75,23 @@
                                         @foreach($tolls as $toll)
                                         <tr class="gradeX">
                                            <td>{{$toll->name}}</td>
+                                           <td>{{($toll->two)?$toll->two->fare:""}}</td>
+                                          <td>{{($toll->two)?$toll->two->returnfare: ""}}</td>
                                           <td>{{($toll->three)?$toll->three->fare:""}}</td>
                                           <td>{{($toll->three)?$toll->three->returnfare: ""}}</td>
-
                                           <td>{{($toll->four)?$toll->four->fare:""}}</td>
                                           <td>{{($toll->four)?$toll->four->returnfare: ""}}</td>
-
-
                                         </tr>
                                         @endforeach
                                         @else
                                         <tr class="gradeX">
-                                            <td colspan="6"><center>NO tolls Added Yet</center></td>
+                                            <td colspan="7"><center>NO tolls Added Yet</center></td>
                                         </tr>
                                         @endif
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="6">
+                                            <td colspan="7">
                                                 <ul class="pagination pull-right"></ul>
                                             </td>
                                         </tr>

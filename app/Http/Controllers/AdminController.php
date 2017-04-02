@@ -148,14 +148,13 @@ public function checkprice(){
 		$tolls=TollPlaza::all();
 		foreach($tolls as $t)
 		{
+			$pricetwo=TollPlazaFares::where([['vehicle_type','two'],['tollplaza_id',$t->id]])->first();
+
 			$pricethree=TollPlazaFares::where([['vehicle_type','three'],['tollplaza_id',$t->id]])->first();
 				$pricefour=TollPlazaFares::where([['vehicle_type','four'],['tollplaza_id',$t->id]])->first();
+				$t->two=$pricetwo;
 				$t->three=$pricethree;
 				$t->four=$pricefour;
-				
-
-
-
 		}
 		//dd($tolls->toArray());
 		return View::make('checkprice', compact('action','tolls'));

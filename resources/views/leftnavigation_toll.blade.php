@@ -63,7 +63,20 @@
                             <div class="modal-body" style="min-height: 200px;">
                                 {{csrf_field()}}
                                 <p><strong>Kindly Enter The Following Details</strong> </p>
-                                <div class="form-group"><label class="col-sm-4 control-label">3-Wheeler Price</label>
+                                <div class="form-group"><label class="col-sm-4 control-label">2 axle Price</label>
+
+                                    <div class="col-sm-10">
+                                        <div class="input-group m-b"><span class="input-group-addon ">&#8377;</span> 
+                                            @if(Session::has('pricetwo'))
+                                            <input type="text" value ="{{Session::get('pricetwo')}}" required id ="pricetwo"  name = "pricetwo" class="form-control"> <span class="input-group-addon"></span>
+                                            @else
+                                            <input type="text"  required id ="pricetwo"  name = "pricetwo" class="form-control"> <span class="input-group-addon"></span>
+
+                                            @endif
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">3 axle Price</label>
 
                                     <div class="col-sm-10">
                                         <div class="input-group m-b"><span class="input-group-addon ">&#8377;</span> 
@@ -76,7 +89,7 @@
                                             </div>
                                     </div>
                                 </div>
-                                   <div class="form-group"><label class="col-sm-4 control-label">4-wheeler Price</label>
+                                   <div class="form-group"><label class="col-sm-4 control-label">4 axle Price</label>
 
                                     <div class="col-sm-10">
                                         <div class="input-group m-b"><span class="input-group-addon ">&#8377;</span> 
