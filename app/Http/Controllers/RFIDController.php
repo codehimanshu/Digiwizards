@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Transaction;
+use DB;
 
 class RFIDController extends Controller
 {
@@ -15,7 +16,13 @@ class RFIDController extends Controller
 
 	public function getdata(Request $request)
 	{
+		$vehicle = DB::table('vehicles')->where('rfid_id',$request->user)->first();
+		$vehicle_id = $vehicle->id;
 		// return var_dump($request);
-		return '{"Succes":"Hello"}';
+		echo $vehicle_id;
+		$paid = substr($request->paid);
+		$pos = strpos($paid, 'p');
+
+		return;
 	}
 }
