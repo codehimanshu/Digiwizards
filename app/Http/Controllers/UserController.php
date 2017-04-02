@@ -110,6 +110,10 @@ class UserController extends Controller
             }
         }
 
-    }       
+    }  
+    public function card_balance(Request $request){
+        $user = User::find(intval($request->get('user_id')));
+        return $user->card_balance;
+    }     
 
 }
