@@ -121,7 +121,7 @@ class UserController extends Controller
         $amount = floatval($request->get('amount'));
         $user->card_balance = floatval($user->card_balance) + floatval($amount);
         if($user->save()){
-            return 1;
+            return $user->card_balance;
         }
         else
             return 0;
