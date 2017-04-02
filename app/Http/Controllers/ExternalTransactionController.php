@@ -36,12 +36,13 @@ class ExternalTransactionController extends Controller
     {
        $data = $request->all();
        // if($data['return'])  //return journey
-       $transaction = new Transaction;
+       $transaction = new ExternalTransaction;
        $transaction->user_id = $data['user_id'];
        $transaction->toll_user_id = 1;
        $transaction->amount = $data['amount'];
        $transaction->mode_of_payment = $data['mode_of_payment'];
       //  $transaction->route = $data['route'];
+       $transaction->transaction_id = $data['transaction_id'];
        $transaction->date = $data['date'];
        $user =  User::find($data['user_id']);
         $user->card_balance =  floatval($user->card_balance) + floatval($data['amount']);

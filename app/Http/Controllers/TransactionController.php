@@ -46,11 +46,10 @@ class TransactionController extends Controller
         $transaction->toll_user_id = 1;
         $transaction->amount = $data['amount'];
         $transaction->mode_of_payment = $data['mode_of_payment'];
-        $transaction->transaction_id = $data['transaction_id'];
         $transaction->route = $data['route'];
         $transaction->date = $data['date'];
         $user =  User::find($vehicle->user_id);
-        $user->card_balance -= $data['amount'];
+        $user->card_balance = floatval($user->card_balance) - floatval($data['amount']);
         $user->save(); 
         if($transaction->save()){
            if(!$data['one_way']){     //return journey
