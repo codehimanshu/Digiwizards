@@ -135,13 +135,13 @@ class TransactionController extends Controller
             if($TollPlazaFares) 
                 $total_cost +=  $TollPlazaFares->fare;
         }
-        if(!$data['one_way']){
+        if(!$request->get('one_way')){
          foreach ($tolls as $toll) {
             $TollPlazaFares =TollPlazaFares::where('tollplaza_id', $toll)->where('vehicle_type',$vehicle->type)->first();
             if($TollPlazaFares) 
                 $total_cost +=  $TollPlazaFares->returnfare;
         }   
         }
-        return json_encode(['total_cost'=>$total_cost,'card_balance'=>$user->card]);
+        return json_encode(['total_cost'=>$total_cost,'card_balance'=>$user->card_balance]);
     }   
 }
