@@ -156,7 +156,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if($transactions)
+                                        @if(count($transactions))
                                         @foreach($transactions as $t)
                                         <tr class="gradeX">
                                             <td>{{$t->rto->classification}}</td>
