@@ -148,6 +148,6 @@ class TransactionController extends Controller
                 $total_cost +=  $TollPlazaFares->returnfare;
         }   
     }
-    return json_encode(['total_cost'=>$total_cost,'card_balance'=>$user->card_balance]);
+    return json_encode(['total_cost'=>strval($total_cost),'card_balance'=>$user->card_balance]);
 }   
 }
