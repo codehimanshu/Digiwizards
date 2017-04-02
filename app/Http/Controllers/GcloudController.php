@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Google\Cloud\Vision\VisionClient;
 use Illuminate\Http\Request;
+use DB;
 
 class GcloudController extends Controller
 {
@@ -19,11 +20,25 @@ class GcloudController extends Controller
 		# Performs label detection on the image file
 		$result = $vision->annotate($image);
 
-		echo "Text:\n";
-		var_dump(json_decode(json_encode((( (array) $result->text() )[0]))),true);
+		// var_dump($result);
+
+		echo "Vehicle No:\n";
+		$no =  $result->text()[0]->description();
+		$no = str_replace(' ', '', $no );
+		echo $no;
+
+		$vehicle = DB::table('rto')->where('vehicle_no',$no)->first();
+		var_dump($vehicle);
+		echo "<br>Type: ".$vehicle->type;
+		echo "<br>Classification: ".$vehicle->classification;
+		echo "<br>Name: ".$vehicle->name;
+		echo "<br>Address: ".$vehicle->address;
+		echo "<br>Mobile: ".$vehicle->mobile;
+		echo "<br>RC: ".$vehicle->RC;
+
+		// var_dump(json_decode(json_encode((( (array) $result->text() )[0]))),true);
 		// foreach ((array) $result->text() as $text) {
 		    // print($text->description() . PHP_EOL);
-		    // echo "!!!";
 		// }
 		return ;
 	}
