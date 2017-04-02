@@ -20,9 +20,11 @@ class GcloudController extends Controller
 		$result = $vision->annotate($image);
 
 		echo "Text:\n";
-		foreach ((array) $result->text() as $text) {
-		    print($text->description() . PHP_EOL);
-		}
+		var_dump(json_decode(json_encode((( (array) $result->text() )[0]))),true);
+		// foreach ((array) $result->text() as $text) {
+		    // print($text->description() . PHP_EOL);
+		    // echo "!!!";
+		// }
 		return ;
 	}
 }
