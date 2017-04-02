@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ExternalTransaction;
+use App\ExternalTransactions;
 use App\User;
 
 class ExternalTransactionController extends Controller
@@ -36,20 +36,23 @@ class ExternalTransactionController extends Controller
      */
     public function store(Request $request)
     {
-       $data = $request->all();
+     $data = $request->all();
        // if($data['return'])  //return journey
-       $transaction = new ExternalTransaction;
-       $transaction->user_id = $data['user_id'];
-       $transaction->toll_user_id = 1;
-       $transaction->amount = $data['amount'];
-       $transaction->mode_of_payment = $data['mode_of_payment'];
+     $transaction = new ExternalTransactions;
+     $transaction->user_id = $data['user_id'];
+     $transaction->vehicle_id = 1;
+     $transaction->status = 1;
+     $transaction->card_details = "   ";
+
+     $transaction->amount = floatval($data['amount']);
+     $transaction->mode_of_payment = $data['mode_of_payment'];
       //  $transaction->route = $data['route'];
-       $transaction->transaction_id = $data['transaction_id'];
-       $transaction->date = $data['date'];
-       $user =  User::find($data['user_id']);
-        $user->card_balance =  floatval($user->card_balance) + floatval($data['amount']);
-        $user->save();
-       if($transaction->save())
+     $transaction->transaction_id = $data['transaction_id'];
+       //$transaction->date = $data['date'];
+     $user =  User::find($data['user_id']);
+     $user->card_balance =  floatval($user->card_balance) + floatval($data['amount']);
+     $user->save();
+     if($transaction->save())
         return 1;
     else 
         return 0;
