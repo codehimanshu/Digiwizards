@@ -35,14 +35,46 @@
                 <a href="{{URL::route('create')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Create new toll</span></a>
             </li>
             @endif
-           
-             <li class="active">
+
+             @if(Request::path() == 'dashboard')
+
+            <li class="active">
                 <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Edit toll</span></a>
             </li>
-             
-             <li class="active">
-                <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Check Prices</span></a>
+            @else
+
+            <li >
+                <a href="{{URL::route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Edit toll</span></a>
             </li>
+            @endif
+            
+           
+           
+
+             @if(Request::path() == 'checkprice')
+
+            <li class="active">
+                <a href="{{URL::route('checkprice')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Checkprice</span></a>
+            </li>
+            @else
+
+            <li >
+                <a href="{{URL::route('checkprice')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Checkprice</span></a>
+            </li>
+            @endif
+             @if(Request::path() == 'checkprice')
+
+            <li class="active">
+                <a href="{{URL::route('checkprice')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Block Cars</span></a>
+            </li>
+            @else
+
+            <li >
+                <a href="{{URL::route('checkprice')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Block Cars</span></a>
+            </li>
+            @endif
+             
+             
 
         
             

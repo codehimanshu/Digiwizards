@@ -65,3 +65,5 @@ Route::get('delete/{id}',array('as'=>'getdetails','uses'=>'AdminController@delet
 
 Route::get('textrecognition', 'GcloudController@index');
 Route::post('editdetails',array('as'=>'editdetails','uses'=>'AdminController@editdetails'));
+Route::get('checkprice',array('as'=>'checkprice','uses'=>'AdminController@checkprice'));
+
