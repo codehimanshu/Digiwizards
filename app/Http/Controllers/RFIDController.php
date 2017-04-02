@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Transaction;
 use DB;
+use Mail;
 
 class RFIDController extends Controller
 {
@@ -21,7 +22,18 @@ class RFIDController extends Controller
 		$vehicle_id = $vehicle->id;
 		$toll= DB::table('transactions')->where('vehicle_id',$vehicle_id)->get();
 		
-		if(empty($toll))
+		$blocked_vehicle = DB::table('blocking')->where('blocked_vehicle',$vehicle_id)->count();
+		if($blocked_vehicle)
+		{
+			$police = DB::table('users')->where('role',6)->first();
+	        Mail::send('emails.notify',[],function($m) use ($police) {
+	                $m->from('shashaa35@gmail.com','Toll');
+	                $m->to($police->email,'Alert')->subject('Notification');
+	            });
+		
+		}
+
+		if(empty($toll)||empty(json_decode($toll)))
 			return 0;
 		else
 		{
@@ -35,14 +47,6 @@ class RFIDController extends Controller
 		}
 
 		return 0;
-		$paid = $request->paid;
-		$paid =substr($paid,1,strlen($paid)-1);
-		
-		$pos = strpos($paid,'p');
-		$toll_id = substr($paid,0,$pos);
-		if($pos+1<=strlen($paid))
-			echo "Subsequent toll;";
-		else echo "First Toll";
-		return $vehicle_id.$paid."Hello";
+
 	}
 }
