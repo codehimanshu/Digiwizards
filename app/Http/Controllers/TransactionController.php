@@ -53,7 +53,7 @@ class TransactionController extends Controller
         $user->card_balance -= $data['amount'];
         $user->save(); 
         if($transaction->save()){
-           if($data['return']){     //return journey
+           if(!$data['one_way']){     //return journey
              $transaction = new Transaction;
              $transaction->user_id = $vehicle->user_id;
              $transaction->vehicle_id = $vehicle->id;
@@ -132,9 +132,15 @@ class TransactionController extends Controller
         $total_cost = 0;
         foreach ($tolls as $toll) {
             $TollPlazaFares =TollPlazaFares::where('tollplaza_id', $toll)->where('vehicle_type',$vehicle->type)->first();
-
             if($TollPlazaFares) 
                 $total_cost +=  $TollPlazaFares->fare;
+        }
+        if(!$data['one_way']){
+         foreach ($tolls as $toll) {
+            $TollPlazaFares =TollPlazaFares::where('tollplaza_id', $toll)->where('vehicle_type',$vehicle->type)->first();
+            if($TollPlazaFares) 
+                $total_cost +=  $TollPlazaFares->returnfare;
+        }   
         }
         return json_encode(['total_cost'=>$total_cost,'card_balance'=>$user->card]);
     }   
