@@ -17,6 +17,7 @@ use Session;
 use App\TollPlaza;
 use App\TollPlazaFares;
 use App\Transaction;
+use App\UserDetail;
 
 class AdminController extends BaseController
 {
@@ -159,6 +160,26 @@ public function checkprice(){
 		//dd($tolls->toArray());
 		return View::make('checkprice', compact('action','tolls'));
 		
+
+	}
+	public function userslist(){
+		$action="Userslist";
+		$users=User::where('role',1)->get();
+		foreach ($users as $u) {
+
+		$detail=UserDetail::where('user_id',$u->id)->first();
+		if(count($detail)){
+			$u->contact=$detail->contact;
+		$u->address=$detail->address;
+		}
+		else{
+			$u->contact="";
+		$u->address="";
+		}
+		
+		}
+				return View::make('userslist', compact('action','users'));
+
 
 	}
 

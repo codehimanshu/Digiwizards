@@ -71,5 +71,7 @@ Route::get('textrecognition', 'GcloudController@index');
 Route::post('editdetails',array('as'=>'editdetails','uses'=>'AdminController@editdetails'));
 
 Route::get('checkprice',array('as'=>'checkprice','uses'=>'AdminController@checkprice'));
+Route::get('userslist',array('as'=>'userslist','uses'=>'AdminController@userslist'));
+
 
 

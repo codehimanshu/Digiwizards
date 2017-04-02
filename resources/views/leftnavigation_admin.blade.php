@@ -74,6 +74,18 @@
             </li>
             @endif
              
+              @if(Request::path() == 'userslist')
+
+            <li class="active">
+                <a href="{{URL::route('userslist')}}"><i class="fa fa-th-large"></i> <span class="nav-label"> List of users</span></a>
+            </li>
+            @else
+
+            <li >
+                <a href="{{URL::route('userslist')}}"><i class="fa fa-th-large"></i> <span class="nav-label"> List of users</span></a>
+            </li>
+            @endif
+             
              
 
         
