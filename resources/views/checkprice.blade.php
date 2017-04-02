@@ -12,66 +12,7 @@
         @include('leftnavigation_admin')
         <div id="page-wrapper" class="gray-bg dashbard-1">
             @include('topnavigation')
-            <div class="wrapper wrapper-content animated fadeIn">
-
-
-               <div class="row">
-
-                 <div class="col-lg-3">
-                    <div class="widget style1 red-bg">
-                        <div class="row">
-                            <div class="col-xs-4 text-center">
-                                <i class="fa fa-automobile fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> Total Tolls</span>
-
-                                <h2 class="font-bold">1000</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="widget style1 navy-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-inr fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> Today income</span>
-                                <h2 class="font-bold">&#8377;10000</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="widget style1 lazur-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-male fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span>RFID customers</span>
-                                <h2 class="font-bold">100</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="widget style1 yellow-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-mobile fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span>Normal customers</span>
-                                <h2 class="font-bold">100</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+           
 
 
 
@@ -118,23 +59,31 @@
                                     <thead>
                                         <tr>
                                             <th>Toll Name</th>
-                                            <th>Action</th>
+                                            <th>3 wheeleer price</th>
+                                            <th>3 wheeleer price Return fare</th>
+
+                                            <th>4 wheeleer price</th>
+                                            <th>4 wheeleer price return fare</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @if(count($tolls))
                                         @foreach($tolls as $toll)
                                         <tr class="gradeX">
-                                           <td> {{$toll->name}}</td>
-                                            <td><a href="{{URL::to('/getdetails/'.$toll->id)}}" class="btn btn-default">edit</a>
-                                                <a href="{{URL::to('/delete/'.$toll->id)}}" class="btn btn-danger">delete</a>
-                                            </td>
+                                           <td>{{$toll->name}}</td>
+                                          <td>{{($toll->three)?$toll->three->fare:""}}</td>
+                                          <td>{{($toll->three)?$toll->three->returnfare: ""}}</td>
+
+                                          <td>{{($toll->four)?$toll->four->fare:""}}</td>
+                                          <td>{{($toll->four)?$toll->four->returnfare: ""}}</td>
+
 
                                         </tr>
                                         @endforeach
                                         @else
                                         <tr class="gradeX">
-                                            <td colspan="6"><center>NO tolls Added Yet/center></td>
+                                            <td colspan="6"><center>NO tolls Added Yet</center></td>
                                         </tr>
                                         @endif
                                     </tbody>
