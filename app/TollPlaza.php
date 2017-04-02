@@ -22,4 +22,8 @@ class TollPlaza extends Model
 		$tolls = self::whereBetween('latitude',[$min_lat,$max_lat])->whereBetween('longitude',[$min_lang,$max_lang])->get();
 		return $tolls;
 	}
+
+	public function get_details($id){
+		
+	}
 }

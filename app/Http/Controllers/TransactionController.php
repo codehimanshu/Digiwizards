@@ -7,7 +7,7 @@ use App\ Transaction;
 use App\ Vehicle;
 use App\ TollPlaza;
 use App\ TollPlazaFares;
-
+use App\ User;
 class TransactionController extends Controller
 {
     /**
