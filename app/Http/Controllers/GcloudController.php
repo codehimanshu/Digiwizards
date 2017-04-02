@@ -29,6 +29,8 @@ class GcloudController extends Controller
 
 		// var_dump($no);
 		$vehicle = DB::table('rto')->where('vehicle_no',$no)->first();
+		if(!empty($vehicle))
+		{
 		// var_dump($vehicle);
 		echo "<br>Type: ".$vehicle->type;
 		echo "<br>Classification: ".$vehicle->classification;
@@ -36,7 +38,7 @@ class GcloudController extends Controller
 		echo "<br>Address: ".$vehicle->address;
 		echo "<br>Mobile: ".$vehicle->mobile;
 		echo "<br>RC: ".$vehicle->RC;
-
+		}
 		// var_dump(json_decode(json_encode((( (array) $result->text() )[0]))),true);
 		// foreach ((array) $result->text() as $text) {
 		    // print($text->description() . PHP_EOL);

@@ -21,6 +21,8 @@ class WebCamController extends Controller
 // Save the image in a defined path
 		$result = file_put_contents($filepath,$data);
 
+		// return redirect("/textrecognition");
+
 	}
 	public function view(){
 		return view('webcam');
