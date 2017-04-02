@@ -20,7 +20,8 @@ class RFIDController extends Controller
 		$vehicle_id = $vehicle->id;
 		// return var_dump($request);
 		echo $vehicle_id;
-		$paid = substr($request->paid);
+		// $paid = substr($request->paid,1,strlen($request->paid-1));
+		// echo $paid;
 		$pos = strpos($paid, 'p');
 
 		return;
