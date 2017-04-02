@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ExternalTransaction;
+use App\User;
 
 class ExternalTransactionController extends Controller
 {
